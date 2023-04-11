@@ -8,27 +8,47 @@
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>美术艺考教学资源系统</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
+      <li nz-menu-item nzIcon="form">
+        <a routerLink="/announcement">
+          <i nz-icon nzType="dashboard"></i>
+          <span>Announcement</span>
+        </a>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-menu-item nzIcon="dashboard">
+        <a routerLink="/resource">
+          <i nz-icon nzType="dashboard"></i>
+          <span>Resource</span>
+        </a>
+      </li>
+      <li nz-menu-item nzIcon="dashboard">
+        <a routerLink="/user-login-register">
+          <i nz-icon nzType="dashboard"></i>
+          <span>User-login-register</span>
+        </a>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Admin" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="/user">User</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/resource-type">Resource-type</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/user-favorite">User-favorite</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/comment">Comment</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/resource">Resource</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/announcement">Announcement</a>
           </li>
         </ul>
       </li>

@@ -13,12 +13,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { UserComponent } from './components/user/user.component';
+import { ResourceComponent } from './components/resource/resource.component';
+import { UserFavoriteComponent } from './components/user-favorite/user-favorite.component';
+import { ResourceTypeComponent } from './components/resource-type/resource-type.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { UserLoginRegisterComponent } from './components/user-login-register/user-login-register.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent,
+    ResourceComponent,
+    UserFavoriteComponent,
+    ResourceTypeComponent,
+    CommentComponent,
+    AnnouncementComponent,
+    UserLoginRegisterComponent
   ],
   imports: [
     BrowserModule,
