@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiHost: 'https://localhost:8080/api',
-  appServiceHost: 'https://localhost:8080'
+  apiHost: 'http://localhost:8080/api',
+  appServiceHost: 'http://localhost:8080'
 };
 
 /*

@@ -15,7 +15,7 @@ export class AuthService {
     return this.http.post<User>(ApiRoute.AUTH.register(), user);
   }
 
-  login(user: User): Observable<User> {
-    return this.http.post<User>(ApiRoute.AUTH.login(), user);
+  login(user: User): Observable<string> {
+    return this.http.post<string>(ApiRoute.AUTH.login(), user);
   }
 }
