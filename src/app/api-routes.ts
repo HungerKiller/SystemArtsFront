@@ -54,9 +54,9 @@ export class ApiRoute {
     }
 
     public static readonly USERFAVORITE = {
-        getUserFavorites: () => `${ApiRoute.BaseUrl}/userFavorites/`,
-        postUserFavorite: () => `${ApiRoute.BaseUrl}/userFavorites/`,
-        deleteUserFavorite: (userFavoriteId: number) => `${ApiRoute.BaseUrl}/userFavorites/${userFavoriteId}`,
-        getUserFavoritesbyUser: (userId: number) => `${ApiRoute.BaseUrl}/userFavorites/byUser/${userId}`
+        getUserFavorites: () => `${ApiRoute.BaseUrl}/user-favorites/`,
+        postUserFavorite: () => `${ApiRoute.BaseUrl}/user-favorites/`,
+        deleteUserFavorite: (userFavoriteId: number) => `${ApiRoute.BaseUrl}/user-favorites/${userFavoriteId}`,
+        getUserFavoritesbyUser: (userId: number) => `${ApiRoute.BaseUrl}/user-favorites/byUser/${userId}`
     }
 }
