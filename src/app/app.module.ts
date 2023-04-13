@@ -27,6 +27,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -38,6 +39,7 @@ import { UserLoginRegisterComponent } from './components/user-login-register/use
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
 import { ResourceTypeDetailComponent } from './components/resource-type-detail/resource-type-detail.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 
 registerLocaleData(zh);
 
@@ -53,7 +55,8 @@ registerLocaleData(zh);
     UserLoginRegisterComponent,
     AnnouncementDetailComponent,
     ResourceTypeDetailComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ResourceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ registerLocaleData(zh);
     NzToolTipModule,
     NzPopconfirmModule,
     NzSelectModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzUploadModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }

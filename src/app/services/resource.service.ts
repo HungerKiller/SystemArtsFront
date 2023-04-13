@@ -35,8 +35,8 @@ export class ResourceService {
     return this.http.delete<Resource>(ApiRoute.RESOURCE.deleteResource(resourceId), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
   }
 
-  uploadResource(resourceId: number): Observable<Resource> {
-    return this.http.post<Resource>(ApiRoute.RESOURCE.uploadResource(resourceId), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
+  uploadResource(resourceId: number, formData: FormData): Observable<Resource> {
+    return this.http.post<Resource>(ApiRoute.RESOURCE.uploadResource(resourceId), formData, {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
   }
 
   // todo return type as any => it is ok?
