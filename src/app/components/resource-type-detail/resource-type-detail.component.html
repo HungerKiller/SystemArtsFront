@@ -7,25 +7,18 @@
                 <input type="text" nz-input [(ngModel)]="id" disabled="true" />
             </div>
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Title</nz-tag><br />
+                <nz-tag class="tag" [nzColor]="'cyan'">Name</nz-tag><br />
                 <nz-input-group [nzSuffix]="inputClearTpl">
-                    <input type="text" nz-input [(ngModel)]="title" placeholder="Input title" />
+                    <input type="text" nz-input [(ngModel)]="name" placeholder="Input name" />
                 </nz-input-group>
                 <ng-template #inputClearTpl>
-                    <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="title"
-                        (click)="title = ''"></i>
+                    <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="name"
+                        (click)="name = ''"></i>
                 </ng-template>
             </div>
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Content</nz-tag><br />
-                <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
-            </div>
-            <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Is Display</nz-tag><br />
-                <nz-switch [(ngModel)]="isDisplay" [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
-                <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
-                <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+                <nz-tag class="tag" [nzColor]="'cyan'">Description</nz-tag><br />
+                <textarea rows="4" nz-input [(ngModel)]="description"></textarea>
             </div>
         </div>
     </ng-container>

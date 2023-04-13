@@ -4,21 +4,24 @@ export class User {
     password: string;
     email: string;
     age?: number;
-    role: Role;
-    token: string;
+    role: RoleEnum;
 
-    constructor(id: number, username: string, password: string, email: string, age: number, role: Role, token: string) {
+    constructor(id: number, username: string, password: string, email: string, age: number, role: RoleEnum) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
         this.role = role;
-        this.token = token;
     }
 }
 
-export enum Role {
+export enum RoleEnum {
     ADMIN = "ADMIN",
     USER = "USER"
 }
+
+export const Role2LabelMapping: Record<RoleEnum, string> = {
+    [RoleEnum.ADMIN]: "ADMIN",
+    [RoleEnum.USER]: "USER"
+};

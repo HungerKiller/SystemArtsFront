@@ -25,6 +25,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -34,6 +36,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { UserLoginRegisterComponent } from './components/user-login-register/user-login-register.component';
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
+import { ResourceTypeDetailComponent } from './components/resource-type-detail/resource-type-detail.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 registerLocaleData(zh);
 
@@ -47,7 +51,9 @@ registerLocaleData(zh);
     CommentComponent,
     AnnouncementComponent,
     UserLoginRegisterComponent,
-    AnnouncementDetailComponent
+    AnnouncementDetailComponent,
+    ResourceTypeDetailComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,9 @@ registerLocaleData(zh);
     NzDrawerModule,
     NzSwitchModule,
     NzToolTipModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzSelectModule,
+    NzInputNumberModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }
