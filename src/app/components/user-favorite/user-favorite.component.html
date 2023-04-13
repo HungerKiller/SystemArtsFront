@@ -1,1 +1,37 @@
-<p>user-favorite works!</p>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
+    <div nz-col [nzSpan]="24">
+        <button nz-button nzType="primary" (click)="createUserFavorite()" nzTooltipTitle="Create"
+            nzTooltipPlacement="topLeft" nz-tooltip>
+            <i nz-icon nzType="plus-square" nzTheme="fill"></i>
+        </button>
+        <br /><br />
+        <nz-table #borderedTable nzBordered [nzShowSizeChanger]="true" [nzPageSizeOptions]='[10,20,30]'
+            [nzPageSize]="10" [nzShowTotal]="totalTemplate" [nzData]="userFavorites" [nzLoading]="loading">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Resource</th>
+                    <th>User</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of borderedTable.data">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.resource.title }}</td>
+                    <td>{{ data.user.username }}</td>
+                    <td>
+                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="Delete" nzTooltipPlacement="topLeft"
+                            nz-tooltip nz-popconfirm nzPopconfirmTitle="Are you sure to delete?" nzOkText="ok"
+                            nzCancelText="cancel" (nzOnConfirm)="deleteUserFavorite(data.id)">
+                            <i nz-icon nzType="delete" nzTheme="fill"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <ng-template #totalTemplate let-total> Total {{ total }} items</ng-template>
+</div>
+
+<app-user-favorite-detail (isNeedRefresh)="refresh()"></app-user-favorite-detail>

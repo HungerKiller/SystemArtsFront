@@ -1,0 +1,34 @@
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="500" [nzVisible]="isVisible"
+    [nzTitle]="pageTitle" [nzFooter]="footerTpl" (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
+            <div nz-col nzSpan="24">
+                <nz-tag class="tag" [nzColor]="'cyan'">Id</nz-tag><br />
+                <input type="text" nz-input [(ngModel)]="id" disabled="true" />
+            </div>
+            <div nz-col nzSpan="24">
+                <nz-tag class="tag" [nzColor]="'cyan'">Content</nz-tag><br />
+                <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
+            </div>
+            <div nz-col nzSpan="24">
+                <nz-tag class="tag" [nzColor]="'cyan'">User</nz-tag><br />
+                <nz-select [(ngModel)]="userId">
+                    <nz-option *ngFor="let r of users" [nzValue]="r.id" [nzLabel]="r.username"></nz-option>
+                </nz-select>
+            </div>
+            <div nz-col nzSpan="24">
+                <nz-tag class="tag" [nzColor]="'cyan'">Resource</nz-tag><br />
+                <nz-select [(ngModel)]="resourceId">
+                    <nz-option *ngFor="let r of resources" [nzValue]="r.id" [nzLabel]="r.title"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #footerTpl>
+        <div style="float: right">
+            <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
+            <button nz-button nzType="primary" (click)="submit()">Submit</button>
+        </div>
+    </ng-template>
+</nz-drawer>

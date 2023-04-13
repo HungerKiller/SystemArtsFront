@@ -40,6 +40,8 @@ import { AnnouncementDetailComponent } from './components/announcement-detail/an
 import { ResourceTypeDetailComponent } from './components/resource-type-detail/resource-type-detail.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { CommentDetailComponent } from './components/comment-detail/comment-detail.component';
+import { UserFavoriteDetailComponent } from './components/user-favorite-detail/user-favorite-detail.component';
 
 registerLocaleData(zh);
 
@@ -56,7 +58,9 @@ registerLocaleData(zh);
     AnnouncementDetailComponent,
     ResourceTypeDetailComponent,
     UserDetailComponent,
-    ResourceDetailComponent
+    ResourceDetailComponent,
+    CommentDetailComponent,
+    UserFavoriteDetailComponent
   ],
   imports: [
     BrowserModule,
