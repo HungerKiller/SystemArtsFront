@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { RoleEnum } from './models/User';
 
@@ -7,7 +7,7 @@ import { RoleEnum } from './models/User';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isCollapsed = false;
   isAdmin = false;
 
@@ -24,5 +24,16 @@ export class AppComponent {
         });
       }
     );
-   }
+  }
+
+  ngOnInit() {
+    this.authService.currentUser().subscribe(user => {
+      if (user) {
+        this.isAdmin = user.role == RoleEnum.ADMIN
+      }
+      else {
+        this.isAdmin = false;
+      }
+    });
+  }
 }
