@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,7 +13,7 @@ export class UserLoginRegisterComponent implements OnInit {
 
   validateForm!: UntypedFormGroup;
 
-  constructor(private authService: AuthService, private messageService: NzMessageService, private fb: UntypedFormBuilder) { }
+  constructor(private authService: AuthService, private messageService: NzMessageService, private fb: UntypedFormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -28,6 +29,7 @@ export class UserLoginRegisterComponent implements OnInit {
           next: token => {
             localStorage.setItem('token', token)
             this.messageService.create("success", "登录成功!");
+            this.authService.subject.next(true);
           },
           error: error => {
             this.messageService.create("error", "用户名或密码错误！");

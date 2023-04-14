@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { ApiRoute } from '../api-routes';
 import { User } from '../models/User';
 
@@ -8,6 +8,13 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class AuthService {
+
+  public subject = new Subject();
+  public subject$ = this.subject.asObservable();
+
+  get token(): any {
+    return localStorage.getItem('token');
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +24,9 @@ export class AuthService {
 
   login(user: User): Observable<string> {
     return this.http.post<string>(ApiRoute.AUTH.login(), user);
+  }
+
+  currentUser(): Observable<User> {
+    return this.http.get<User>(ApiRoute.AUTH.currentUser(), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
   }
 }

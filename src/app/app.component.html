@@ -30,7 +30,7 @@
           <span>User-login-register</span>
         </a>
       </li>
-      <li nz-submenu nzOpen nzTitle="Admin" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Admin" nzIcon="form" *ngIf="isAdmin">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/user">User</a>

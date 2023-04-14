@@ -7,6 +7,7 @@ export class ApiRoute {
     public static readonly AUTH = {
         register: () => `${ApiRoute.BaseUrl}/auth/register`,
         login: () => `${ApiRoute.BaseUrl}/auth/login`,
+        currentUser: () => `${ApiRoute.BaseUrl}/auth/currentUser`
     }
 
     public static readonly USER = {
