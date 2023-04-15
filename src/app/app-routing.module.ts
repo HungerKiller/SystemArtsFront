@@ -10,9 +10,15 @@ import { CommentComponent } from './components/comment/comment.component';
 import { AuthGuard } from './auth-guard';
 import { RoleEnum } from './models/User';
 import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
+import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
+import { HomeResourceComponent } from './components/home-resource/home-resource.component';
+import { HomeResourceDetailComponent } from './components/home-resource-detail/home-resource-detail.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/user-login-register' },
+  { path: '', pathMatch: 'full', redirectTo: '/home-announcement' },
+  { path: 'home-announcement', component: HomeAnnouncementComponent },
+  { path: 'home-resource', component: HomeResourceComponent },
+  { path: 'home-resource-detail', component: HomeResourceDetailComponent },
   { path: 'user-info-logout', component: UserInfoLogoutComponent },
   { path: 'user-login-register', component: UserLoginRegisterComponent },
   { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },

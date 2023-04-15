@@ -16,7 +16,7 @@ export class AnnouncementService {
   constructor(private http: HttpClient) { }
 
   getAnnouncements(): Observable<Announcement[]> {
-    return this.http.get<Announcement[]>(ApiRoute.ANNOUNCEMENT.getAnnouncements(), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
+    return this.http.get<Announcement[]>(ApiRoute.ANNOUNCEMENT.getAnnouncements());
   }
 
   getAnnouncement(announcementId: number): Observable<Announcement> {

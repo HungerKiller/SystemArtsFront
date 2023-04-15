@@ -1,0 +1,8 @@
+<nz-carousel nzAutoPlay>
+    <div nz-carousel-content *ngFor="let announcement of announcements">
+        <div *ngIf="announcement.isDisplay">
+            <h3>{{ announcement.title }}</h3>
+            <p>{{ announcement.content }}</p>
+        </div>
+    </div>
+</nz-carousel>

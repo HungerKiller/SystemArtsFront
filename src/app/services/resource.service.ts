@@ -16,7 +16,7 @@ export class ResourceService {
   constructor(private http: HttpClient) { }
 
   getResources(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(ApiRoute.RESOURCE.getResources(), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
+    return this.http.get<Resource[]>(ApiRoute.RESOURCE.getResources());
   }
 
   getResource(resourceId: number): Observable<Resource> {

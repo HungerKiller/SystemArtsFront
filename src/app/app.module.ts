@@ -30,6 +30,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -45,6 +46,9 @@ import { ResourceDetailComponent } from './components/resource-detail/resource-d
 import { CommentDetailComponent } from './components/comment-detail/comment-detail.component';
 import { UserFavoriteDetailComponent } from './components/user-favorite-detail/user-favorite-detail.component';
 import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
+import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
+import { HomeResourceComponent } from './components/home-resource/home-resource.component';
+import { HomeResourceDetailComponent } from './components/home-resource-detail/home-resource-detail.component';
 
 registerLocaleData(zh);
 
@@ -64,7 +68,10 @@ registerLocaleData(zh);
     ResourceDetailComponent,
     CommentDetailComponent,
     UserFavoriteDetailComponent,
-    UserInfoLogoutComponent
+    UserInfoLogoutComponent,
+    HomeAnnouncementComponent,
+    HomeResourceComponent,
+    HomeResourceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +99,8 @@ registerLocaleData(zh);
     NzInputNumberModule,
     NzUploadModule,
     NzAvatarModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzCarouselModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }
