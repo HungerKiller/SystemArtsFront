@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/User';
+import { RoleEnum, User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-user',
@@ -40,12 +40,15 @@ export class UserComponent implements OnInit {
     this.userDetailComponent.role = selectedUser.role;
     this.userDetailComponent.pageTitle = "Update";
     this.userDetailComponent.isVisible = true;
+    this.userDetailComponent.disableRole = false;
   }
 
   createUser(): void {
     this.userDetailComponent.id = 0;
+    this.userDetailComponent.role = RoleEnum.USER;
     this.userDetailComponent.pageTitle = "Create";
     this.userDetailComponent.isVisible = true;
+    this.userDetailComponent.disableRole = false;
   }
 
   deleteUser(userId: number): void {

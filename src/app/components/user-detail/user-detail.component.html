@@ -24,7 +24,7 @@
             </div>
             <div nz-col nzSpan="24">
                 <nz-tag class="tag" [nzColor]="'cyan'">Role</nz-tag><br />
-                <nz-select [(ngModel)]="role">
+                <nz-select [(ngModel)]="role" [disabled]="disableRole">
                     <nz-option *ngFor="let r of roles" [nzValue]="r" [nzLabel]="r"></nz-option>
                 </nz-select>
             </div>

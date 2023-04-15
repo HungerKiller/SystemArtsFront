@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { RoleEnum } from 'src/app/models/User';
 
 @Component({
   selector: 'app-user-login-register',
@@ -10,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-login-register.component.scss']
 })
 export class UserLoginRegisterComponent implements OnInit {
+
+  @ViewChild(UserDetailComponent) userDetailComponent!: UserDetailComponent;
 
   validateForm!: UntypedFormGroup;
 
@@ -44,5 +48,13 @@ export class UserLoginRegisterComponent implements OnInit {
         }
       });
     }
+  }
+
+  registerUser(): void {
+    this.userDetailComponent.id = 0;
+    this.userDetailComponent.role = RoleEnum.USER;
+    this.userDetailComponent.pageTitle = "Register";
+    this.userDetailComponent.isVisible = true;
+    this.userDetailComponent.disableRole = true;
   }
 }
