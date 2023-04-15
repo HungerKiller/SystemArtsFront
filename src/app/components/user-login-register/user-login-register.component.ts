@@ -34,6 +34,7 @@ export class UserLoginRegisterComponent implements OnInit {
             localStorage.setItem('token', token)
             this.messageService.create("success", "登录成功!");
             this.authService.subject.next(true);
+            this.router.navigate(['/user-info-logout']);
           },
           error: error => {
             this.messageService.create("error", "用户名或密码错误！");

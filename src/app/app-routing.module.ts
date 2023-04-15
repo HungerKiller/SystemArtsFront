@@ -9,14 +9,16 @@ import { UserFavoriteComponent } from './components/user-favorite/user-favorite.
 import { CommentComponent } from './components/comment/comment.component';
 import { AuthGuard } from './auth-guard';
 import { RoleEnum } from './models/User';
+import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/announcement' },
-  { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
-  { path: 'resource', component: ResourceComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
+  { path: '', pathMatch: 'full', redirectTo: '/user-login-register' },
+  { path: 'user-info-logout', component: UserInfoLogoutComponent },
   { path: 'user-login-register', component: UserLoginRegisterComponent },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
+  { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'resource-type', component: ResourceTypeComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
+  { path: 'resource', component: ResourceComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user-favorite', component: UserFavoriteComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } }
 ];

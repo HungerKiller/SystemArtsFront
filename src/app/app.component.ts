@@ -10,6 +10,7 @@ import { RoleEnum } from './models/User';
 export class AppComponent implements OnInit {
   isCollapsed = false;
   isAdmin = false;
+  isUserConnected = false;
 
   constructor(private authService: AuthService) {
     this.authService.subject$.subscribe(
@@ -17,9 +18,11 @@ export class AppComponent implements OnInit {
         this.authService.currentUser().subscribe(user => {
           if (user) {
             this.isAdmin = user.role == RoleEnum.ADMIN
+            this.isUserConnected = true;
           }
           else {
             this.isAdmin = false;
+            this.isUserConnected = false;
           }
         });
       }
@@ -30,9 +33,11 @@ export class AppComponent implements OnInit {
     this.authService.currentUser().subscribe(user => {
       if (user) {
         this.isAdmin = user.role == RoleEnum.ADMIN
+        this.isUserConnected = true;
       }
       else {
         this.isAdmin = false;
+        this.isUserConnected = false;
       }
     });
   }

@@ -46,4 +46,4 @@
     <ng-template #totalTemplate let-total> Total {{ total }} items</ng-template>
 </div>
 
-<app-user-detail></app-user-detail>
+<app-user-detail (isNeedRefresh)="refresh()"></app-user-detail>

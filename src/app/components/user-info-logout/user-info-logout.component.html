@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="user-info">
+        <h1 nz-typography>User
+            <nz-avatar [nzText]="user?.username" nzSize="large"></nz-avatar>
+        </h1>
+        <p nz-typography>Username: {{user?.username}}</p>
+        <p nz-typography>Password: {{user?.password}}</p>
+        <p nz-typography>Email: {{user?.email}}</p>
+        <p nz-typography>Age: {{user?.age}}</p>
+        <p nz-typography>Role: {{user?.role}}</p>
+        <button nz-button class="button" (click)="update()" [nzType]="'primary'">Update</button>
+        <button nz-button class="button" (click)="logout()" [nzType]="'primary'">Logout</button>
+    </div>
+</div>
+
+<app-user-detail (isNeedRefresh)="refresh()"></app-user-detail>

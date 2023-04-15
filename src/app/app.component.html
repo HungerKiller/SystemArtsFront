@@ -12,26 +12,35 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzIcon="form">
+      <li nz-menu-item>
         <a routerLink="/announcement">
-          <i nz-icon nzType="dashboard"></i>
+          <i nz-icon nzType="notification"></i>
           <span>Announcement</span>
         </a>
       </li>
-      <li nz-menu-item nzIcon="dashboard">
+      <li nz-menu-item>
         <a routerLink="/resource">
-          <i nz-icon nzType="dashboard"></i>
+          <i nz-icon nzType="appstore"></i>
           <span>Resource</span>
         </a>
       </li>
-      <li nz-menu-item nzIcon="dashboard">
+      <li nz-menu-item *ngIf="!isUserConnected">
         <a routerLink="/user-login-register">
-          <i nz-icon nzType="dashboard"></i>
+          <i nz-icon nzType="user-switch"></i>
           <span>User-login-register</span>
+        </a>
+      </li>
+      <li nz-menu-item *ngIf="isUserConnected">
+        <a routerLink="/user-info-logout">
+          <i nz-icon nzType="user"></i>
+          <span>User-info-logout</span>
         </a>
       </li>
       <li nz-submenu nzOpen nzTitle="Admin" nzIcon="form" *ngIf="isAdmin">
         <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/announcement">Announcement</a>
+          </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/user">User</a>
           </li>
@@ -39,16 +48,13 @@
             <a routerLink="/resource-type">Resource-type</a>
           </li>
           <li nz-menu-item nzMatchRouter>
+            <a routerLink="/resource">Resource</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a routerLink="/user-favorite">User-favorite</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/comment">Comment</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/resource">Resource</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/announcement">Announcement</a>
           </li>
         </ul>
       </li>

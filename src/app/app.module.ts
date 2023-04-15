@@ -28,6 +28,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -42,6 +44,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
 import { CommentDetailComponent } from './components/comment-detail/comment-detail.component';
 import { UserFavoriteDetailComponent } from './components/user-favorite-detail/user-favorite-detail.component';
+import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
 
 registerLocaleData(zh);
 
@@ -60,7 +63,8 @@ registerLocaleData(zh);
     UserDetailComponent,
     ResourceDetailComponent,
     CommentDetailComponent,
-    UserFavoriteDetailComponent
+    UserFavoriteDetailComponent,
+    UserInfoLogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,9 @@ registerLocaleData(zh);
     NzPopconfirmModule,
     NzSelectModule,
     NzInputNumberModule,
-    NzUploadModule
+    NzUploadModule,
+    NzAvatarModule,
+    NzTypographyModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }
