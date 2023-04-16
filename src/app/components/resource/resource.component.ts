@@ -90,6 +90,7 @@ export class ResourceComponent implements OnInit {
         }
       });
   }
+  
   createResource(): void {
     this.resourceDetailComponent.id = 0;
     this.resourceDetailComponent.pageTitle = "Create";

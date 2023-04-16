@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserInfoLogoutComponent implements OnInit {
 
   @ViewChild(UserDetailComponent) userDetailComponent!: UserDetailComponent
-  user: User | undefined;
+  currentUser: User | undefined;
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.subject$.subscribe(
@@ -29,22 +29,22 @@ export class UserInfoLogoutComponent implements OnInit {
   getCurrentUser(): void {
     this.authService.currentUser().subscribe(user => {
       if (user) {
-        this.user = user;
+        this.currentUser = user;
       }
       else {
-        this.user = undefined;
+        this.currentUser = undefined;
       }
     });
   }
 
   update(): void {
-    if (this.user) {
-      this.userDetailComponent.id = this.user.id;
-      this.userDetailComponent.username = this.user.username;
-      this.userDetailComponent.password = this.user.password;
-      this.userDetailComponent.email = this.user.email;
-      this.userDetailComponent.age = this.user.age;
-      this.userDetailComponent.role = this.user.role;
+    if (this.currentUser) {
+      this.userDetailComponent.id = this.currentUser.id;
+      this.userDetailComponent.username = this.currentUser.username;
+      this.userDetailComponent.password = this.currentUser.password;
+      this.userDetailComponent.email = this.currentUser.email;
+      this.userDetailComponent.age = this.currentUser.age;
+      this.userDetailComponent.role = this.currentUser.role;
       this.userDetailComponent.pageTitle = "Update";
       this.userDetailComponent.isVisible = true;
       this.userDetailComponent.disableRole = true;
