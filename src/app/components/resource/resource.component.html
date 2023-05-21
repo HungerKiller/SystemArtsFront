@@ -11,6 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Title</th>
+                    <th>Click Count</th>
                     <th>Price</th>
                     <th>Resource Type</th>
                     <th>User</th>
@@ -23,6 +24,7 @@
                 <tr *ngFor="let data of borderedTable.data">
                     <td>{{ data.id }}</td>
                     <td>{{ data.title }}</td>
+                    <td>{{ data.clickCount }}</td>
                     <td>{{ data.price }}</td>
                     <td>{{ data.resourceType.name }}</td>
                     <td>{{ data.user.username }}</td>

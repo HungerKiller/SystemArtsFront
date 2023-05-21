@@ -18,6 +18,7 @@ export class ResourceDetailComponent implements OnInit {
   title!: string;
   description!: string;
   price!: number;
+  clickCount!: number;
   resourceType!: ResourceType;
   user!: User;
   createdAt!: Date;
@@ -74,7 +75,7 @@ export class ResourceDetailComponent implements OnInit {
 
   submit(): void {
     if (this.pageTitle == "Update") {
-      this.resourceService.putResource(this.id, new Resource(this.id, this.title, this.description, this.price, this.resourceType, this.user))
+      this.resourceService.putResource(this.id, new Resource(this.id, this.title, this.description, this.price, this.clickCount, this.resourceType, this.user))
         .subscribe({
           next: data => {
             this.messageService.create("success", "Update succeed!");
@@ -87,7 +88,7 @@ export class ResourceDetailComponent implements OnInit {
         });
     }
     else if (this.pageTitle == "Create") {
-      this.resourceService.postResource(new Resource(0, this.title, this.description, this.price, this.resourceType, this.user))
+      this.resourceService.postResource(new Resource(0, this.title, this.description, this.price, this.clickCount, this.resourceType, this.user))
         .subscribe({
           next: data => {
             this.messageService.create("success", "Create succeed!");
