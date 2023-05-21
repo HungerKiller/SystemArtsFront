@@ -32,9 +32,15 @@ export class ApiRoute {
         postResource: () => `${ApiRoute.BaseUrl}/resources/`,
         putResource: (resourceId: number) => `${ApiRoute.BaseUrl}/resources/${resourceId}`,
         deleteResource: (resourceId: number) => `${ApiRoute.BaseUrl}/resources/${resourceId}`,
-        uploadResource: (resourceId: number) => `${ApiRoute.BaseUrl}/resources/upload/${resourceId}`,
-        downloadResource: (resourceId: number) => `${ApiRoute.BaseUrl}/resources/download/${resourceId}`,
         getResourcesByUserId: (userId: number) => `${ApiRoute.BaseUrl}/resources/byUser/${userId}`
+    }
+
+    public static readonly RESOURCEFILE = {
+        getResourceFiles: () => `${ApiRoute.BaseUrl}/resource-files/`,
+        getResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/${resourceFileId}`,
+        uploadResourceFile: (resourceId: number) => `${ApiRoute.BaseUrl}/resource-files/upload/${resourceId}`,
+        deleteResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/${resourceFileId}`,
+        downloadResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/download/${resourceFileId}`
     }
 
     public static readonly ANNOUNCEMENT = {

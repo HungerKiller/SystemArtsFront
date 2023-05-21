@@ -4,6 +4,7 @@ import { ResourceDetailComponent } from '../resource-detail/resource-detail.comp
 import { ResourceService } from 'src/app/services/resource.service';
 import { Resource } from 'src/app/models/Resource';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { ResourceFileService } from 'src/app/services/resource-file.service';
 
 @Component({
   selector: 'app-resource',
@@ -17,7 +18,7 @@ export class ResourceComponent implements OnInit {
   loading = true;
   currentUploadResourceId!: number;
 
-  constructor(private resourceService: ResourceService, private messageService: NzMessageService) { }
+  constructor(private resourceService: ResourceService, private resourceFileService: ResourceFileService, private messageService: NzMessageService) { }
 
   ngOnInit() {
     this.getResources();
@@ -61,7 +62,7 @@ export class ResourceComponent implements OnInit {
       return formData.append('file', file, file.name);
     });
 
-    this.resourceService.uploadResource(this.currentUploadResourceId, formData)
+    this.resourceFileService.uploadResourceFile(this.currentUploadResourceId, formData)
       .subscribe({
         next: data => {
           this.messageService.create("success", `File is uploaded successfully!`);
@@ -79,8 +80,9 @@ export class ResourceComponent implements OnInit {
     upload.click();
   }
 
+  // todo use resourceFileId
   downloadResource(resourceId: number): void {
-    this.resourceService.downloadResource(resourceId)
+    this.resourceFileService.downloadResourceFile(resourceId)
       .subscribe({
         next: data => {
           this.messageService.create("success", `File is downloaded successfully!`);

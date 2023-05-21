@@ -17,7 +17,7 @@ export class HomeResourceComponent implements OnInit {
   loading = true;
   currentUploadResourceId!: number;
 
-  constructor(private resourceService: ResourceService, private messageService: NzMessageService) { }
+  constructor(private resourceService: ResourceService, private resourceFileService: ResourceFileService, private authService: AuthService, private messageService: NzMessageService) { }
 
   ngOnInit() {
     this.getResources();
@@ -61,7 +61,7 @@ export class HomeResourceComponent implements OnInit {
       return formData.append('file', file, file.name);
     });
 
-    this.resourceService.uploadResource(this.currentUploadResourceId, formData)
+    this.resourceFileService.uploadResourceFile(this.currentUploadResourceId, formData)
       .subscribe({
         next: data => {
           this.messageService.create("success", `File is uploaded successfully!`);
@@ -79,8 +79,9 @@ export class HomeResourceComponent implements OnInit {
     upload.click();
   }
 
+  // todo use resourceFileId
   downloadResource(resourceId: number): void {
-    this.resourceService.downloadResource(resourceId)
+    this.resourceFileService.downloadResourceFile(resourceId)
       .subscribe({
         next: data => {
           this.messageService.create("success", `File is downloaded successfully!`);
