@@ -42,7 +42,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
-import { ResourceComponent } from './components/resource/resource.component';
+import { HomeResourceViewComponent } from './components/home-resource-view/home-resource-view.component';
 import { UserFavoriteComponent } from './components/user-favorite/user-favorite.component';
 import { ResourceTypeComponent } from './components/resource-type/resource-type.component';
 import { CommentComponent } from './components/comment/comment.component';
@@ -51,13 +51,13 @@ import { UserLoginRegisterComponent } from './components/user-login-register/use
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
 import { ResourceTypeDetailComponent } from './components/resource-type-detail/resource-type-detail.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import { ResourceDetailComponent } from './components/resource-detail/resource-detail.component';
+import { HomeResourceViewDetailComponent } from './components/home-resource-view-detail/home-resource-view-detail.component';
 import { CommentDetailComponent } from './components/comment-detail/comment-detail.component';
 import { UserFavoriteDetailComponent } from './components/user-favorite-detail/user-favorite-detail.component';
 import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
 import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
-import { HomeResourceComponent } from './components/home-resource/home-resource.component';
-import { HomeResourceDetailComponent } from './components/home-resource-detail/home-resource-detail.component';
+import { HomeResourceEditComponent } from './components/home-resource-edit/home-resource-edit.component';
+import { HomeResourceEditDetailComponent } from './components/home-resource-edit-detail/home-resource-edit-detail.component';
 
 registerLocaleData(zh);
 
@@ -65,7 +65,7 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     UserComponent,
-    ResourceComponent,
+    HomeResourceViewComponent,
     UserFavoriteComponent,
     ResourceTypeComponent,
     CommentComponent,
@@ -74,13 +74,13 @@ registerLocaleData(zh);
     AnnouncementDetailComponent,
     ResourceTypeDetailComponent,
     UserDetailComponent,
-    ResourceDetailComponent,
+    HomeResourceViewDetailComponent,
     CommentDetailComponent,
     UserFavoriteDetailComponent,
     UserInfoLogoutComponent,
     HomeAnnouncementComponent,
-    HomeResourceComponent,
-    HomeResourceDetailComponent
+    HomeResourceEditComponent,
+    HomeResourceEditDetailComponent
   ],
   imports: [
     BrowserModule,

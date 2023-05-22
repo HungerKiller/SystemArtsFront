@@ -19,7 +19,13 @@
         </a>
       </li>
       <li nz-menu-item>
-        <a routerLink="/home-resource">
+        <a routerLink="/home-resource-view">
+          <i nz-icon nzType="appstore"></i>
+          <span>Resource View</span>
+        </a>
+      </li>
+      <li nz-menu-item *ngIf="isUserConnected">
+        <a routerLink="/home-resource-edit">
           <i nz-icon nzType="appstore"></i>
           <span>Resource</span>
         </a>
@@ -46,9 +52,6 @@
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/resource-type">Resource-type</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/resource">Resource</a>
           </li>
           <li nz-menu-item nzMatchRouter *ngIf="false">
             <a routerLink="/user-favorite">User-favorite</a>

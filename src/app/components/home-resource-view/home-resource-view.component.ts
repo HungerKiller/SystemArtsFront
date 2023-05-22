@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ResourceDetailComponent } from '../resource-detail/resource-detail.component';
+import { HomeResourceViewDetailComponent } from '../home-resource-view-detail/home-resource-view-detail.component';
 import { ResourceService } from 'src/app/services/resource.service';
 import { Resource } from 'src/app/models/Resource';
 import { ResourceFileService } from 'src/app/services/resource-file.service';
@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/User';
 
 @Component({
-  selector: 'app-resource',
-  templateUrl: './resource.component.html',
-  styleUrls: ['./resource.component.scss']
+  selector: 'app-home-resource-view',
+  templateUrl: './home-resource-view.component.html',
+  styleUrls: ['./home-resource-view.component.scss']
 })
-export class ResourceComponent implements OnInit {
+export class HomeResourceViewComponent implements OnInit {
 
-  @ViewChild(ResourceDetailComponent) resourceDetailComponent!: ResourceDetailComponent;
+  @ViewChild(HomeResourceViewDetailComponent) resourceDetailComponent!: HomeResourceViewDetailComponent;
   resources!: Resource[];
   loading = true;
   currentUploadResourceId!: number;

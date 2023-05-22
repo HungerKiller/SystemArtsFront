@@ -6,17 +6,17 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { AuthService } from 'src/app/services/auth.service';
 import { RoleEnum, User } from 'src/app/models/User';
 import { ResourceFileService } from 'src/app/services/resource-file.service';
-import { HomeResourceDetailComponent } from '../home-resource-detail/home-resource-detail.component';
+import { HomeResourceEditDetailComponent } from '../home-resource-edit-detail/home-resource-edit-detail.component';
 import { ApiRoute } from 'src/app/api-routes';
 
 @Component({
-  selector: 'app-home-resource',
-  templateUrl: './home-resource.component.html',
-  styleUrls: ['./home-resource.component.scss']
+  selector: 'app-home-resource-edit',
+  templateUrl: './home-resource-edit.component.html',
+  styleUrls: ['./home-resource-edit.component.scss']
 })
-export class HomeResourceComponent implements OnInit {
+export class HomeResourceEditComponent implements OnInit {
 
-  @ViewChild(HomeResourceDetailComponent) resourceDetailComponent!: HomeResourceDetailComponent;
+  @ViewChild(HomeResourceEditDetailComponent) resourceDetailComponent!: HomeResourceEditDetailComponent;
   resources!: Resource[];
   loading = true;
   currentUploadResourceId!: number;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
-import { ResourceComponent } from './components/resource/resource.component';
+import { HomeResourceViewComponent } from './components/home-resource-view/home-resource-view.component';
 import { UserLoginRegisterComponent } from './components/user-login-register/user-login-register.component';
 import { UserComponent } from './components/user/user.component';
 import { ResourceTypeComponent } from './components/resource-type/resource-type.component';
@@ -11,19 +11,17 @@ import { AuthGuard } from './auth-guard';
 import { RoleEnum } from './models/User';
 import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
 import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
-import { HomeResourceComponent } from './components/home-resource/home-resource.component';
-import { HomeResourceDetailComponent } from './components/home-resource-detail/home-resource-detail.component';
+import { HomeResourceEditComponent } from './components/home-resource-edit/home-resource-edit.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home-announcement' },
   { path: 'home-announcement', component: HomeAnnouncementComponent },
-  { path: 'home-resource', component: HomeResourceComponent },
-  { path: 'home-resource-detail', component: HomeResourceDetailComponent },
+  { path: 'home-resource-view', component: HomeResourceViewComponent },
+  { path: 'home-resource-edit', component: HomeResourceEditComponent },
   { path: 'user-info-logout', component: UserInfoLogoutComponent },
   { path: 'user-login-register', component: UserLoginRegisterComponent },
   { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'resource-type', component: ResourceTypeComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
-  { path: 'resource', component: ResourceComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user-favorite', component: UserFavoriteComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } }

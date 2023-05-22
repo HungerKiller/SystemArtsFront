@@ -7,14 +7,13 @@ import { User } from 'src/app/models/User';
 import { CommentService } from 'src/app/services/comment.service';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceService } from 'src/app/services/resource.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-resource-detail',
-  templateUrl: './resource-detail.component.html',
-  styleUrls: ['./resource-detail.component.scss']
+  selector: 'app-home-resource-edit-detail',
+  templateUrl: './home-resource-edit-detail.component.html',
+  styleUrls: ['./home-resource-edit-detail.component.scss']
 })
-export class ResourceDetailComponent implements OnInit {
+export class HomeResourceEditDetailComponent implements OnInit {
 
   resource: Resource | undefined;
   title!: string;
@@ -22,18 +21,14 @@ export class ResourceDetailComponent implements OnInit {
   price!: number;
   clickCount!: number;
   resourceType: ResourceType | undefined;
-  user: User | undefined;
+  resourceTypeId!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  comments!: Comment[];
   resourceFilesPath!: string[];
+  comments!: Comment[];
+
   currentUser: User | undefined;
-
-  userId!: number;
-  resourceTypeId!: number;
-
   resourceTypes!: ResourceType[];
-  users!: User[];
 
   pageTitle!: string;
   isVisible!: boolean;
@@ -47,25 +42,12 @@ export class ResourceDetailComponent implements OnInit {
   constructor(
     private resourceService: ResourceService,
     private resourceTypeService: ResourceTypeService,
-    private userService: UserService,
     private commentService: CommentService,
     private messageService: NzMessageService) {
-    this.getUsers();
     this.getResourceTypes();
   }
 
   ngOnInit(): void {
-  }
-
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe({
-        next: users => {
-          this.users = users;
-          this.user = users[0];
-          this.userId = users[0].id;
-        }
-      });
   }
 
   getResourceTypes(): void {
@@ -87,7 +69,7 @@ export class ResourceDetailComponent implements OnInit {
     this.submitting = true;
     const content = this.inputValue;
     this.inputValue = '';
-    this.commentService.postComment(new Comment(0, content, this.user!, this.resource!.id))
+    this.commentService.postComment(new Comment(0, content, this.currentUser!, this.resource!.id))
         .subscribe({
           next: data => {
             this.messageService.create("success", "Create succeed!");
@@ -98,5 +80,34 @@ export class ResourceDetailComponent implements OnInit {
             this.messageService.create("error", error.error);
           }
         });
+  }
+
+  submit(): void {
+    if (this.pageTitle == "Update") {
+      this.resourceService.putResource(this.resource!.id, new Resource(this.resource!.id, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.currentUser!))
+        .subscribe({
+          next: data => {
+            this.messageService.create("success", "Update succeed!");
+            this.close();
+            this.isNeedRefresh.emit();
+          },
+          error: error => {
+            this.messageService.create("error", error.error);
+          }
+        });
+    }
+    else if (this.pageTitle == "Create") {
+      this.resourceService.postResource(new Resource(0, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.currentUser!))
+        .subscribe({
+          next: data => {
+            this.messageService.create("success", "Create succeed!");
+            this.close();
+            this.isNeedRefresh.emit();
+          },
+          error: error => {
+            this.messageService.create("error", error.error);
+          }
+        });
+    }
   }
 }

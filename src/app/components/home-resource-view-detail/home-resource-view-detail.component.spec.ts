@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceDetailComponent } from './resource-detail.component';
+import { HomeResourceViewDetailComponent } from './home-resource-view-detail.component';
 
 describe('ResourceDetailComponent', () => {
-  let component: ResourceDetailComponent;
-  let fixture: ComponentFixture<ResourceDetailComponent>;
+  let component: HomeResourceViewDetailComponent;
+  let fixture: ComponentFixture<HomeResourceViewDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResourceDetailComponent ]
+      declarations: [ HomeResourceViewDetailComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ResourceDetailComponent);
+    fixture = TestBed.createComponent(HomeResourceViewDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

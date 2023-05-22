@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeResourceDetailComponent } from './home-resource-detail.component';
+import { HomeResourceEditDetailComponent } from './home-resource-edit-detail.component';
 
 describe('HomeResourceDetailComponent', () => {
-  let component: HomeResourceDetailComponent;
-  let fixture: ComponentFixture<HomeResourceDetailComponent>;
+  let component: HomeResourceEditDetailComponent;
+  let fixture: ComponentFixture<HomeResourceEditDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeResourceDetailComponent ]
+      declarations: [ HomeResourceEditDetailComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeResourceDetailComponent);
+    fixture = TestBed.createComponent(HomeResourceEditDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
