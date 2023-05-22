@@ -1,18 +1,17 @@
-import { Resource } from "./Resource";
 import { User } from "./User";
 
 export class Comment {
     id: number;
     content: string;
     user: User;
-    resource: Resource;
+    resourceId: number;
     createdAt!: Date;
     updatedAt!: Date;
 
-    constructor(id: number, content: string, user: User, resource: Resource) {
+    constructor(id: number, content: string, user: User, resourceId: number) {
         this.id = id;
         this.content = content;
         this.user = user;
-        this.resource = resource;
+        this.resourceId = resourceId;
     }
 }

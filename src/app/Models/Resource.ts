@@ -1,3 +1,5 @@
+import { Comment } from "./Comment";
+import { ResourceFile } from "./ResourceFile";
 import { ResourceType } from "./ResourceType";
 import { User } from "./User";
 
@@ -11,6 +13,10 @@ export class Resource {
     user: User;
     createdAt!: Date;
     updatedAt!: Date;
+    comments!: Comment[];
+    resourceFiles!: ResourceFile[];
+    resourceFilesPath!: string[];
+    firstResouceFilePath!: string;
 
     constructor(id: number, title: string, description: string, price: number, clickCount: number, resourceType: ResourceType, user: User) {
         this.id = id;

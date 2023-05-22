@@ -2,3 +2,22 @@
     margin-top: 8px;
     margin-bottom: 4px;
 }
+
+.img {
+    // width: 500px;
+    height: 100%;
+    margin: auto;
+}
+
+[nz-carousel-content] {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    color: #fff;
+    overflow: hidden;
+}
+
+.title {
+    font-weight: bold
+}

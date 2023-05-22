@@ -11,7 +11,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Content</th>
-                    <th>Resource</th>
                     <th>User</th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -22,7 +21,6 @@
                 <tr *ngFor="let data of borderedTable.data">
                     <td>{{ data.id }}</td>
                     <td>{{ data.content }}</td>
-                    <td>{{ data.resource.title }}</td>
                     <td>{{ data.user.username }}</td>
                     <td>{{ data.createdAt | date: 'medium' }}</td>
                     <td>{{ data.updatedAt | date: 'medium' }}</td>

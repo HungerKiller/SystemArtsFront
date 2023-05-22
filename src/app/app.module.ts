@@ -34,6 +34,11 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -106,7 +111,12 @@ registerLocaleData(zh);
     NzCarouselModule,
     NzAffixModule,
     NzBackTopModule,
-    NzImageModule
+    NzImageModule,
+    NzDescriptionsModule,
+    NzCommentModule,
+    NzListModule,
+    NzStepsModule,
+    NzTimelineModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }

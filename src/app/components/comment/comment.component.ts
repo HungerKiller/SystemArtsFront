@@ -35,9 +35,8 @@ export class CommentComponent implements OnInit {
   editComment(selectedComment: Comment): void {
     this.commentDetailComponent.id = selectedComment.id;
     this.commentDetailComponent.content = selectedComment.content;
-    this.commentDetailComponent.resource = selectedComment.resource;
     this.commentDetailComponent.user = selectedComment.user;
-    this.commentDetailComponent.resourceId = selectedComment.resource.id;
+    this.commentDetailComponent.resourceId = selectedComment.resourceId;
     this.commentDetailComponent.userId = selectedComment.user.id;
     this.commentDetailComponent.createdAt = selectedComment.createdAt;
     this.commentDetailComponent.updatedAt = selectedComment.updatedAt;

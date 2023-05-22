@@ -72,7 +72,7 @@ export class CommentDetailComponent implements OnInit {
 
   submit(): void {
     if (this.pageTitle == "Update") {
-      this.commentService.putComment(this.id, new Comment(this.id, this.content, this.user, this.resource))
+      this.commentService.putComment(this.id, new Comment(this.id, this.content, this.user, this.resourceId))
         .subscribe({
           next: data => {
             this.messageService.create("success", "Update succeed!");
@@ -85,7 +85,7 @@ export class CommentDetailComponent implements OnInit {
         });
     }
     else if (this.pageTitle == "Create") {
-      this.commentService.postComment(new Comment(0, this.content, this.user, this.resource))
+      this.commentService.postComment(new Comment(0, this.content, this.user, this.resourceId))
         .subscribe({
           next: data => {
             this.messageService.create("success", "Create succeed!");

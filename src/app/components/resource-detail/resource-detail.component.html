@@ -1,42 +1,56 @@
-<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="500" [nzVisible]="isVisible"
-    [nzTitle]="pageTitle" [nzFooter]="footerTpl" (nzOnClose)="close()">
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="600" [nzVisible]="isVisible"
+    [nzTitle]="pageTitle" (nzOnClose)="close()">
     <ng-container *nzDrawerContent>
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Id</nz-tag><br />
-                <input type="text" nz-input [(ngModel)]="id" disabled="true" />
+                <nz-carousel nzAutoPlay>
+                    <div nz-carousel-content *ngFor="let path of resourceFilesPath">
+                        <img nz-image class="img" [nzSrc]="path" alt="" />
+                    </div>
+                </nz-carousel>
             </div>
+
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Title</nz-tag><br />
-                <input type="text" nz-input [(ngModel)]="title" placeholder="Input title" />
+                <nz-divider class="title" nzText="基本信息" nzOrientation="left"></nz-divider>
+                <nz-descriptions>
+                    <nz-descriptions-item nzTitle="标题">{{title}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="资源类型">{{resourceType?.name}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="价格">{{price}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="创建者">{{user?.username}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="创建时间" [nzSpan]="2">{{createdAt}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="描述" [nzSpan]="3">{{description}}</nz-descriptions-item>
+                </nz-descriptions>
             </div>
+
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Description</nz-tag><br />
-                <input type="text" nz-input [(ngModel)]="description" placeholder="Input description" />
-            </div>
-            <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Price</nz-tag><br />
-                <nz-input-number [(ngModel)]="price" [nzMin]="0" [nzMax]="1000" [nzStep]="1"></nz-input-number>
-            </div>
-            <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">User</nz-tag><br />
-                <nz-select [(ngModel)]="userId">
-                    <nz-option *ngFor="let r of users" [nzValue]="r.id" [nzLabel]="r.username"></nz-option>
-                </nz-select>
-            </div>
-            <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Resource Type</nz-tag><br />
-                <nz-select [(ngModel)]="resourceTypeId">
-                    <nz-option *ngFor="let r of resourceTypes" [nzValue]="r.id" [nzLabel]="r.name"></nz-option>
-                </nz-select>
+                <nz-divider class="title" nzText="评论" nzOrientation="left"></nz-divider>
+                <nz-list [nzDataSource]="comments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                    <ng-template #item let-item>
+                        <nz-comment [nzAuthor]="item.user.username" [nzDatetime]="item.createdAt">
+                            <nz-avatar nz-comment-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+                            <nz-comment-content>
+                                <p>{{ item.content }}</p>
+                            </nz-comment-content>
+                            <nz-comment-action>Reply to</nz-comment-action>
+                        </nz-comment>
+                    </ng-template>
+                </nz-list>
+
+                <nz-comment *ngIf="currentUser">
+                    <nz-avatar nz-comment-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+                    <nz-comment-content>
+                        <nz-form-item>
+                            <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                                (click)="handleSubmit()">
+                                Add Comment
+                            </button>
+                        </nz-form-item>
+                    </nz-comment-content>
+                </nz-comment>
             </div>
         </div>
     </ng-container>
-
-    <ng-template #footerTpl>
-        <div style="float: right">
-            <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
-            <button nz-button nzType="primary" (click)="submit()">Submit</button>
-        </div>
-    </ng-template>
 </nz-drawer>
