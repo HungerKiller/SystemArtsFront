@@ -38,6 +38,7 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
@@ -116,7 +117,8 @@ registerLocaleData(zh);
     NzCommentModule,
     NzListModule,
     NzStepsModule,
-    NzTimelineModule
+    NzTimelineModule,
+    NzModalModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }

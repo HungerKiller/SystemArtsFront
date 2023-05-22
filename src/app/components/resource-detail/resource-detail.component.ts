@@ -99,33 +99,4 @@ export class ResourceDetailComponent implements OnInit {
           }
         });
   }
-
-  submit(): void {
-    if (this.pageTitle == "Update") {
-      this.resourceService.putResource(this.resource!.id, new Resource(this.resource!.id, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.user!))
-        .subscribe({
-          next: data => {
-            this.messageService.create("success", "Update succeed!");
-            this.close();
-            this.isNeedRefresh.emit();
-          },
-          error: error => {
-            this.messageService.create("error", error.error);
-          }
-        });
-    }
-    else if (this.pageTitle == "Create") {
-      this.resourceService.postResource(new Resource(0, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.user!))
-        .subscribe({
-          next: data => {
-            this.messageService.create("success", "Create succeed!");
-            this.close();
-            this.isNeedRefresh.emit();
-          },
-          error: error => {
-            this.messageService.create("error", error.error);
-          }
-        });
-    }
-  }
 }
