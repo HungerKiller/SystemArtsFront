@@ -28,6 +28,7 @@ export class CommentDetailComponent implements OnInit {
   users!: User[];
 
   pageTitle!: string;
+  pageTitleChinese!: string;
   isVisible!: boolean;
 
   @Output() isNeedRefresh = new EventEmitter<boolean>();
@@ -75,7 +76,7 @@ export class CommentDetailComponent implements OnInit {
       this.commentService.putComment(this.id, new Comment(this.id, this.content, this.user, this.resourceId))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Update succeed!");
+            this.messageService.create("success", "更新成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -88,7 +89,7 @@ export class CommentDetailComponent implements OnInit {
       this.commentService.postComment(new Comment(0, this.content, this.user, this.resourceId))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

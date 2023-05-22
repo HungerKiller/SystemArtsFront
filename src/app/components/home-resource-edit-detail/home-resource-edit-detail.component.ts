@@ -31,6 +31,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
   resourceTypes!: ResourceType[];
 
   pageTitle!: string;
+  pageTitleChinese!: string;
   isVisible!: boolean;
 
   // comments
@@ -72,7 +73,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
     this.commentService.postComment(new Comment(0, content, this.currentUser!, this.resource!.id))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "评论成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -87,7 +88,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
       this.resourceService.putResource(this.resource!.id, new Resource(this.resource!.id, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.currentUser!))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Update succeed!");
+            this.messageService.create("success", "更新成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -100,7 +101,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
       this.resourceService.postResource(new Resource(0, this.title, this.description, this.price, this.clickCount, this.resourceType!, this.currentUser!))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

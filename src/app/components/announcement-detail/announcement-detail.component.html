@@ -1,5 +1,5 @@
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="500" [nzVisible]="isVisible"
-    [nzTitle]="pageTitle" [nzFooter]="footerTpl" (nzOnClose)="close()">
+    [nzTitle]="pageTitleChinese" [nzFooter]="footerTpl" (nzOnClose)="close()">
     <ng-container *nzDrawerContent>
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
             <div nz-col nzSpan="24">
@@ -7,7 +7,7 @@
                 <input type="text" nz-input [(ngModel)]="id" disabled="true" />
             </div>
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Title</nz-tag><br />
+                <nz-tag class="tag" [nzColor]="'cyan'">标题</nz-tag><br />
                 <nz-input-group [nzSuffix]="inputClearTpl">
                     <input type="text" nz-input [(ngModel)]="title" placeholder="Input title" />
                 </nz-input-group>
@@ -17,11 +17,11 @@
                 </ng-template>
             </div>
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Content</nz-tag><br />
+                <nz-tag class="tag" [nzColor]="'cyan'">内容</nz-tag><br />
                 <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
             </div>
             <div nz-col nzSpan="24">
-                <nz-tag class="tag" [nzColor]="'cyan'">Is Display</nz-tag><br />
+                <nz-tag class="tag" [nzColor]="'cyan'">是否显示</nz-tag><br />
                 <nz-switch [(ngModel)]="isDisplay" [nzCheckedChildren]="checkedTemplate"
                     [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
                 <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
@@ -32,8 +32,8 @@
 
     <ng-template #footerTpl>
         <div style="float: right">
-            <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
-            <button nz-button nzType="primary" (click)="submit()">Submit</button>
+            <button nz-button style="margin-right: 8px;" (click)="close()">取消</button>
+            <button nz-button nzType="primary" (click)="submit()">提交</button>
         </div>
     </ng-template>
 </nz-drawer>

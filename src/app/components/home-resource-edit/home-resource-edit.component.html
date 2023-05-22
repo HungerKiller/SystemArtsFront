@@ -1,7 +1,7 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
     <div nz-col [nzSpan]="24">
         <div *ngIf="currentUser">
-            <button nz-button nzType="primary" (click)="createResource()" nzTooltipTitle="Create" nzTooltipPlacement="topLeft"
+            <button nz-button nzType="primary" (click)="createResource()" nzTooltipTitle="新建" nzTooltipPlacement="topLeft"
                 nz-tooltip>
                 <i nz-icon nzType="plus-square" nzTheme="fill"></i>
             </button>
@@ -12,13 +12,13 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Resource Type</th>
-                    <th>User</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Action</th>
+                    <th>标题</th>
+                    <th>价格</th>
+                    <th>资源类型</th>
+                    <th>用户</th>
+                    <th>创建于</th>
+                    <th>更新于</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,22 +31,22 @@
                     <td>{{ data.createdAt | date: 'medium' }}</td>
                     <td>{{ data.updatedAt | date: 'medium' }}</td>
                     <td>
-                        <button nz-button nzType="primary" (click)="editResource(data)" nzTooltipTitle="Edit"
+                        <button nz-button nzType="primary" (click)="editResource(data)" nzTooltipTitle="编辑"
                             nzTooltipPlacement="topLeft" nz-tooltip>
                             <i nz-icon nzType="edit" nzTheme="fill"></i>
                         </button>
                         <nz-divider nzType="vertical"></nz-divider>
 
-                        <button nz-button nzType="primary" (click)="uploadResource(data.id)" nzTooltipTitle="Upload" nzTooltipPlacement="topLeft"
+                        <button nz-button nzType="primary" (click)="uploadResource(data.id)" nzTooltipTitle="上传" nzTooltipPlacement="topLeft"
                             nz-tooltip>
                             <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
                         </button>
                         <input id="file-upload" type="file" #file nz-input placeholder="Choose file" (change)="uploadFile(file.files)">
                         <nz-divider nzType="vertical"></nz-divider>
 
-                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="Delete" nzTooltipPlacement="topLeft"
-                            nz-tooltip nz-popconfirm nzPopconfirmTitle="Are you sure to delete?" nzOkText="ok"
-                            nzCancelText="cancel" (nzOnConfirm)="deleteResource(data.id)">
+                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="删除" nzTooltipPlacement="topLeft"
+                            nz-tooltip nz-popconfirm nzPopconfirmTitle="确认删除?" nzOkText="确认"
+                            nzCancelText="取消" (nzOnConfirm)="deleteResource(data.id)">
                             <i nz-icon nzType="delete" nzTheme="fill"></i>
                         </button>
                     </td>
@@ -54,7 +54,7 @@
             </tbody>
         </nz-table>
     </div>
-    <ng-template #totalTemplate let-total> Total {{ total }} items</ng-template>
+    <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
 </div>
 
 <app-home-resource-edit-detail (isNeedRefresh)="refresh()"></app-home-resource-edit-detail>

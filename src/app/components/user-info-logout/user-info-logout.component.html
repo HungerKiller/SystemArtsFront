@@ -1,15 +1,15 @@
 <div class="container">
     <div class="user-info">
-        <h1 nz-typography>User
+        <h1 nz-typography>用户信息
             <nz-avatar [nzText]="currentUser?.username" nzSize="large"></nz-avatar>
         </h1>
-        <p nz-typography>Username: {{currentUser?.username}}</p>
-        <p nz-typography>Password: {{currentUser?.password}}</p>
-        <p nz-typography>Email: {{currentUser?.email}}</p>
-        <p nz-typography>Age: {{currentUser?.age}}</p>
-        <p nz-typography>Role: {{currentUser?.role}}</p>
-        <button nz-button class="button" (click)="update()" [nzType]="'primary'">Update</button>
-        <button nz-button class="button" (click)="logout()" [nzType]="'primary'">Logout</button>
+        <p nz-typography>用户名: {{currentUser?.username}}</p>
+        <p nz-typography>密码: {{currentUser?.password}}</p>
+        <p nz-typography>邮箱: {{currentUser?.email}}</p>
+        <p nz-typography>年龄: {{currentUser?.age}}</p>
+        <p nz-typography>角色: {{currentUser?.role}}</p>
+        <button nz-button class="button" (click)="update()" [nzType]="'primary'">更新</button>
+        <button nz-button class="button" (click)="logout()" [nzType]="'primary'">登出</button>
     </div>
 </div>
 

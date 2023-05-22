@@ -14,6 +14,7 @@ export class ResourceTypeDetailComponent implements OnInit {
   description!: string;
 
   pageTitle!: string;
+  pageTitleChinese!: string;
   isVisible!: boolean;
 
   @Output() isNeedRefresh = new EventEmitter<boolean>();
@@ -32,7 +33,7 @@ export class ResourceTypeDetailComponent implements OnInit {
       this.resourceTypeService.putResourceType(this.id, { id: this.id, name: this.name, description: this.description })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Update succeed!");
+            this.messageService.create("success", "更新成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -45,7 +46,7 @@ export class ResourceTypeDetailComponent implements OnInit {
       this.resourceTypeService.postResourceType({ id: 0, name: this.name, description: this.description })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

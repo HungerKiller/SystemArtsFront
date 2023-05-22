@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   roles = Object.values(RoleEnum);
 
   pageTitle!: string;
+  pageTitleChinese!: string;
   isVisible!: boolean;
   disableRole!: boolean;
 
@@ -44,7 +45,7 @@ export class UserDetailComponent implements OnInit {
       this.userService.putUser(this.id, { id: this.id, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Update succeed!");
+            this.messageService.create("success", "更新成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -57,7 +58,7 @@ export class UserDetailComponent implements OnInit {
       this.userService.postUser({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -70,7 +71,7 @@ export class UserDetailComponent implements OnInit {
       this.authService.register({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Register succeed!");
+            this.messageService.create("success", "注册成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

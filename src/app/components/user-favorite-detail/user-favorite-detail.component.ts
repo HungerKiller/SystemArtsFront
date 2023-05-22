@@ -72,7 +72,7 @@ export class UserFavoriteDetailComponent implements OnInit {
       this.userFavoriteService.postUserFavorite(new UserFavorite(0, this.user, this.resource))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

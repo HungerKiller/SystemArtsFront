@@ -90,7 +90,7 @@ export class HomeResourceViewDetailComponent implements OnInit {
     this.commentService.postComment(new Comment(0, content, this.user!, this.resource!.id))
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "评论成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

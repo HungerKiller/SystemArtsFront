@@ -95,6 +95,7 @@ export class HomeResourceEditComponent implements OnInit {
 
   createResource(): void {
     this.resourceDetailComponent.pageTitle = "Create";
+    this.resourceDetailComponent.pageTitleChinese = "新建";
     this.resourceDetailComponent.isVisible = true;
     this.resourceDetailComponent.currentUser = this.currentUser;
   }
@@ -112,6 +113,7 @@ export class HomeResourceEditComponent implements OnInit {
     this.resourceDetailComponent.resourceFilesPath = selectedResource.resourceFilesPath;
     this.resourceDetailComponent.comments = selectedResource.comments;
     this.resourceDetailComponent.pageTitle = "Update";
+    this.resourceDetailComponent.pageTitleChinese = "编辑";
     this.resourceDetailComponent.isVisible = true;
     this.resourceDetailComponent.currentUser = this.currentUser;
   }
@@ -131,7 +133,7 @@ export class HomeResourceEditComponent implements OnInit {
     this.resourceFileService.uploadResourceFile(this.currentUploadResourceId, formData)
       .subscribe({
         next: data => {
-          this.messageService.create("success", `File is uploaded successfully!`);
+          this.messageService.create("success", `文件上传成功!`);
           this.refresh();
         },
         error: error => {
@@ -163,7 +165,7 @@ export class HomeResourceEditComponent implements OnInit {
     this.resourceService.deleteResource(resourceId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getResourcesByUserRole();;
         },
         error: error => {

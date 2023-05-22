@@ -1,6 +1,6 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
     <div nz-col [nzSpan]="24">
-        <button nz-button nzType="primary" (click)="createUser()" nzTooltipTitle="Create"
+        <button nz-button nzType="primary" (click)="createUser()" nzTooltipTitle="新建"
             nzTooltipPlacement="topLeft" nz-tooltip>
             <i nz-icon nzType="plus-square" nzTheme="fill"></i>
         </button>
@@ -10,12 +10,12 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Role</th>
-                    <th>Action</th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>邮箱</th>
+                    <th>年龄</th>
+                    <th>角色</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,15 +27,15 @@
                     <td>{{ data.age }}</td>
                     <td>{{ data.role }}</td>
                     <td>
-                        <button nz-button nzType="primary" (click)="editUser(data)" nzTooltipTitle="Edit"
+                        <button nz-button nzType="primary" (click)="editUser(data)" nzTooltipTitle="编辑"
                             nzTooltipPlacement="topLeft" nz-tooltip>
                             <i nz-icon nzType="edit" nzTheme="fill"></i>
                         </button>
                         <nz-divider nzType="vertical"></nz-divider>
 
-                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="Delete" nzTooltipPlacement="topLeft"
-                            nz-tooltip nz-popconfirm nzPopconfirmTitle="Are you sure to delete?" nzOkText="ok"
-                            nzCancelText="cancel" (nzOnConfirm)="deleteUser(data.id)">
+                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="删除" nzTooltipPlacement="topLeft"
+                            nz-tooltip nz-popconfirm nzPopconfirmTitle="确认删除？" nzOkText="确认"
+                            nzCancelText="取消" (nzOnConfirm)="deleteUser(data.id)">
                             <i nz-icon nzType="delete" nzTheme="fill"></i>
                         </button>
                     </td>
@@ -43,7 +43,7 @@
             </tbody>
         </nz-table>
     </div>
-    <ng-template #totalTemplate let-total> Total {{ total }} items</ng-template>
+    <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
 </div>
 
 <app-user-detail (isNeedRefresh)="refresh()"></app-user-detail>

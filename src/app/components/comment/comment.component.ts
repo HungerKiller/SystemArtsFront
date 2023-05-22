@@ -41,12 +41,14 @@ export class CommentComponent implements OnInit {
     this.commentDetailComponent.createdAt = selectedComment.createdAt;
     this.commentDetailComponent.updatedAt = selectedComment.updatedAt;
     this.commentDetailComponent.pageTitle = "Update";
+    this.commentDetailComponent.pageTitleChinese = "编辑";
     this.commentDetailComponent.isVisible = true;
   }
 
   createComment(): void {
     this.commentDetailComponent.id = 0;
     this.commentDetailComponent.pageTitle = "Create";
+    this.commentDetailComponent.pageTitleChinese = "新建";
     this.commentDetailComponent.isVisible = true;
   }
 
@@ -54,7 +56,7 @@ export class CommentComponent implements OnInit {
     this.commentService.deleteComment(commentId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getComments();
         },
         error: error => {

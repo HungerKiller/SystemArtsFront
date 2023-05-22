@@ -1,5 +1,5 @@
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="600" [nzVisible]="isVisible"
-    [nzTitle]="pageTitle" (nzOnClose)="close()">
+    nzTitle="资源详细信息" (nzOnClose)="close()">
     <ng-container *nzDrawerContent>
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
             <div nz-col nzSpan="24">
@@ -45,7 +45,7 @@
                         <nz-form-item>
                             <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
                                 (click)="handleSubmit()">
-                                Add Comment
+                                添加评论
                             </button>
                         </nz-form-item>
                     </nz-comment-content>

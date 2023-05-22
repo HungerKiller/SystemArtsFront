@@ -52,7 +52,7 @@ export class UserFavoriteComponent implements OnInit {
     this.userFavoriteService.deleteUserFavorite(userFavoriteId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getUserFavorites();
         },
         error: error => {

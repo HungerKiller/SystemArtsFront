@@ -15,6 +15,7 @@ export class AnnouncementDetailComponent implements OnInit {
   isDisplay!: boolean;
 
   pageTitle!: string;
+  pageTitleChinese!: string;
   isVisible!: boolean;
 
   @Output() isNeedRefresh = new EventEmitter<boolean>();
@@ -33,7 +34,7 @@ export class AnnouncementDetailComponent implements OnInit {
       this.announcementService.putAnnouncement(this.id, { id: this.id, title: this.title, content: this.content, isDisplay: this.isDisplay })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Update succeed!");
+            this.messageService.create("success", "更新成功!");
             this.close();
             this.isNeedRefresh.emit();
           },
@@ -46,7 +47,7 @@ export class AnnouncementDetailComponent implements OnInit {
       this.announcementService.postAnnouncement({ id: 0, title: this.title, content: this.content, isDisplay: this.isDisplay })
         .subscribe({
           next: data => {
-            this.messageService.create("success", "Create succeed!");
+            this.messageService.create("success", "创建成功!");
             this.close();
             this.isNeedRefresh.emit();
           },

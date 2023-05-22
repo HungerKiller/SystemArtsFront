@@ -55,6 +55,7 @@ export class UserLoginRegisterComponent implements OnInit {
     this.userDetailComponent.id = 0;
     this.userDetailComponent.role = RoleEnum.USER;
     this.userDetailComponent.pageTitle = "Register";
+    this.userDetailComponent.pageTitleChinese = "注册";
     this.userDetailComponent.isVisible = true;
     this.userDetailComponent.disableRole = true;
   }

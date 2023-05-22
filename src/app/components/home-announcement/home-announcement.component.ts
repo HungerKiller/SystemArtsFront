@@ -50,7 +50,7 @@ export class HomeAnnouncementComponent implements OnInit {
     this.announcementService.deleteAnnouncement(announcementId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getAnnouncements();
         },
         error: error => {

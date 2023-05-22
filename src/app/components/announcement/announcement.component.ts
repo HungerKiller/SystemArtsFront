@@ -37,12 +37,14 @@ export class AnnouncementComponent implements OnInit {
     this.announcementDetailComponent.content = selectedAnnouncement.content;
     this.announcementDetailComponent.isDisplay = selectedAnnouncement.isDisplay;
     this.announcementDetailComponent.pageTitle = "Update";
+    this.announcementDetailComponent.pageTitleChinese = "编辑";
     this.announcementDetailComponent.isVisible = true;
   }
 
   createAnnouncement(): void {
     this.announcementDetailComponent.id = 0;
     this.announcementDetailComponent.pageTitle = "Create";
+    this.announcementDetailComponent.pageTitleChinese = "新建";
     this.announcementDetailComponent.isVisible = true;
   }
 
@@ -50,7 +52,7 @@ export class AnnouncementComponent implements OnInit {
     this.announcementService.deleteAnnouncement(announcementId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getAnnouncements();
         },
         error: error => {

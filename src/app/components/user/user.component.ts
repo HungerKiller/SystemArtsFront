@@ -39,6 +39,7 @@ export class UserComponent implements OnInit {
     this.userDetailComponent.age = selectedUser.age;
     this.userDetailComponent.role = selectedUser.role;
     this.userDetailComponent.pageTitle = "Update";
+    this.userDetailComponent.pageTitleChinese = "编辑";
     this.userDetailComponent.isVisible = true;
     this.userDetailComponent.disableRole = false;
   }
@@ -47,6 +48,7 @@ export class UserComponent implements OnInit {
     this.userDetailComponent.id = 0;
     this.userDetailComponent.role = RoleEnum.USER;
     this.userDetailComponent.pageTitle = "Create";
+    this.userDetailComponent.pageTitleChinese = "新建";
     this.userDetailComponent.isVisible = true;
     this.userDetailComponent.disableRole = false;
   }
@@ -55,7 +57,7 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(userId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getUsers();
         },
         error: error => {

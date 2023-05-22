@@ -46,6 +46,7 @@ export class UserInfoLogoutComponent implements OnInit {
       this.userDetailComponent.age = this.currentUser.age;
       this.userDetailComponent.role = this.currentUser.role;
       this.userDetailComponent.pageTitle = "Update";
+      this.userDetailComponent.pageTitleChinese = "编辑";
       this.userDetailComponent.isVisible = true;
       this.userDetailComponent.disableRole = true;
     }

@@ -36,12 +36,14 @@ export class ResourceTypeComponent implements OnInit {
     this.resourceTypeDetailComponent.name = selectedResourceType.name;
     this.resourceTypeDetailComponent.description = selectedResourceType.description;
     this.resourceTypeDetailComponent.pageTitle = "Update";
+    this.resourceTypeDetailComponent.pageTitleChinese = "编辑";
     this.resourceTypeDetailComponent.isVisible = true;
   }
 
   createResourceType(): void {
     this.resourceTypeDetailComponent.id = 0;
     this.resourceTypeDetailComponent.pageTitle = "Create";
+    this.resourceTypeDetailComponent.pageTitleChinese = "新建";
     this.resourceTypeDetailComponent.isVisible = true;
   }
 
@@ -49,7 +51,7 @@ export class ResourceTypeComponent implements OnInit {
     this.resourceTypeService.deleteResourceType(resourceTypeId)
       .subscribe({
         next: data => {
-          this.messageService.create("success", "Delete succeed!");
+          this.messageService.create("success", "删除成功!");
           this.getResourceTypes();
         },
         error: error => {

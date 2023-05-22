@@ -15,52 +15,52 @@
       <li nz-menu-item>
         <a routerLink="/home-announcement">
           <i nz-icon nzType="notification"></i>
-          <span>Announcement</span>
+          <span>公告</span>
         </a>
       </li>
       <li nz-menu-item>
         <a routerLink="/home-resource-view">
           <i nz-icon nzType="appstore"></i>
-          <span>Resource View</span>
+          <span>查看资源</span>
         </a>
       </li>
       <li nz-menu-item *ngIf="isUserConnected">
         <a routerLink="/home-resource-edit">
           <i nz-icon nzType="appstore"></i>
-          <span>Resource</span>
+          <span>编辑资源</span>
         </a>
       </li>
       <li nz-menu-item *ngIf="!isUserConnected">
         <a routerLink="/user-login-register">
           <i nz-icon nzType="user-switch"></i>
-          <span>User-login-register</span>
+          <span>用户登录注册</span>
         </a>
       </li>
       <li nz-menu-item *ngIf="isUserConnected">
         <a routerLink="/user-info-logout">
           <i nz-icon nzType="user"></i>
-          <span>User-info-logout</span>
+          <span>用户个人信息</span>
         </a>
       </li>
-      <li nz-submenu nzOpen nzTitle="Admin" nzIcon="form" *ngIf="isAdmin">
+      <li nz-submenu nzOpen nzTitle="管理员" nzIcon="form" *ngIf="isAdmin">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/announcement">Announcement</a>
+            <a routerLink="/announcement">公告管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/user">User</a>
+            <a routerLink="/user">用户管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/resource-type">Resource-type</a>
+            <a routerLink="/resource-type">资源类型管理</a>
           </li>
           <li nz-menu-item nzMatchRouter *ngIf="false">
             <a routerLink="/user-favorite">User-favorite</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/comment">Comment</a>
+            <a routerLink="/comment">评论管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/data-visualization">Data Visualization</a>
+            <a routerLink="/data-visualization">数据可视化</a>
           </li>
         </ul>
       </li>
