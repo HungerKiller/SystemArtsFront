@@ -31,6 +31,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzAffixModule } from 'ng-zorro-antd/affix';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzImageModule } from 'ng-zorro-antd/image';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { ResourceComponent } from './components/resource/resource.component';
@@ -100,7 +103,10 @@ registerLocaleData(zh);
     NzUploadModule,
     NzAvatarModule,
     NzTypographyModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzAffixModule,
+    NzBackTopModule,
+    NzImageModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }
