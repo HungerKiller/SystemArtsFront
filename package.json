@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "@ant-design/icons-angular": "^15.0.0",
+    "echarts": "^5.4.2",
+    "echarts-for-angular": "^0.4.0",
     "ng-zorro-antd": "^15.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

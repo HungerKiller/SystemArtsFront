@@ -12,6 +12,7 @@ import { RoleEnum } from './models/User';
 import { UserInfoLogoutComponent } from './components/user-info-logout/user-info-logout.component';
 import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
 import { HomeResourceEditComponent } from './components/home-resource-edit/home-resource-edit.component';
+import { DataVisualizationComponent } from './components/data-visualization/data-visualization.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home-announcement' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'resource-type', component: ResourceTypeComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user-favorite', component: UserFavoriteComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
-  { path: 'comment', component: CommentComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } }
+  { path: 'comment', component: CommentComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
+  { path: 'data-visualization', component: DataVisualizationComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } }
 ];
 
 @NgModule({

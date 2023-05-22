@@ -40,6 +40,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { HomeResourceViewComponent } from './components/home-resource-view/home-resource-view.component';
@@ -58,6 +59,8 @@ import { UserInfoLogoutComponent } from './components/user-info-logout/user-info
 import { HomeAnnouncementComponent } from './components/home-announcement/home-announcement.component';
 import { HomeResourceEditComponent } from './components/home-resource-edit/home-resource-edit.component';
 import { HomeResourceEditDetailComponent } from './components/home-resource-edit-detail/home-resource-edit-detail.component';
+import { EchartsxModule } from 'echarts-for-angular';
+import { DataVisualizationComponent } from './components/data-visualization/data-visualization.component';
 
 registerLocaleData(zh);
 
@@ -80,7 +83,8 @@ registerLocaleData(zh);
     UserInfoLogoutComponent,
     HomeAnnouncementComponent,
     HomeResourceEditComponent,
-    HomeResourceEditDetailComponent
+    HomeResourceEditDetailComponent,
+    DataVisualizationComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +122,9 @@ registerLocaleData(zh);
     NzListModule,
     NzStepsModule,
     NzTimelineModule,
-    NzModalModule
+    NzModalModule,
+    NzTabsModule,
+    EchartsxModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }
