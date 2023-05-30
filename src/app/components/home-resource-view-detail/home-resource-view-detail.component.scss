@@ -21,3 +21,19 @@
 .title {
     font-weight: bold
 }
+
+.functions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.like {
+    color:#dc143c;
+    font-size: 30px;
+}
+
+.buy {
+    color:#3399ff;
+    font-size: 30px;
+}

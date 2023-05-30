@@ -4,9 +4,11 @@ import { Comment } from 'src/app/models/Comment';
 import { Resource } from 'src/app/models/Resource';
 import { ResourceType } from 'src/app/models/ResourceType';
 import { User } from 'src/app/models/User';
+import { UserFavorite } from 'src/app/models/UserFavorite';
 import { CommentService } from 'src/app/services/comment.service';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceService } from 'src/app/services/resource.service';
+import { UserFavoriteService } from 'src/app/services/user-favorite.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -42,11 +44,15 @@ export class HomeResourceViewDetailComponent implements OnInit {
   submitting = false;
   inputValue = '';
 
+  // isFavorite
+  userFavorite: UserFavorite | undefined;
+
   @Output() isNeedRefresh = new EventEmitter<boolean>();
 
   constructor(
     private resourceService: ResourceService,
     private resourceTypeService: ResourceTypeService,
+    private userFavoriteService: UserFavoriteService,
     private userService: UserService,
     private commentService: CommentService,
     private messageService: NzMessageService) {
@@ -98,5 +104,26 @@ export class HomeResourceViewDetailComponent implements OnInit {
             this.messageService.create("error", error.error);
           }
         });
+  }
+
+  changeFavorite(): void {
+    if (this.userFavorite) {
+      this.userFavoriteService.deleteUserFavorite(this.userFavorite.id).subscribe({
+        next: data => {
+          this.userFavorite = undefined;
+        }
+      })
+    }
+    else {
+      this.userFavoriteService.postUserFavorite(new UserFavorite(this.currentUser!, this.resource!)).subscribe({
+        next: data => {
+          this.userFavorite = data;
+        }
+      })
+    }
+  }
+
+  addToCart(): void {
+    
   }
 }

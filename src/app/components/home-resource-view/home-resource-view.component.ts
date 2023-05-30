@@ -7,6 +7,8 @@ import { ResourceFileService } from 'src/app/services/resource-file.service';
 import { ApiRoute } from 'src/app/api-routes';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/User';
+import { UserFavoriteService } from 'src/app/services/user-favorite.service';
+import { UserFavorite } from 'src/app/models/UserFavorite';
 
 @Component({
   selector: 'app-home-resource-view',
@@ -25,6 +27,7 @@ export class HomeResourceViewComponent implements OnInit {
   constructor(
     private resourceService: ResourceService,
     private resourceFileService: ResourceFileService,
+    private userFavoriteService: UserFavoriteService,
     private authService: AuthService,
     private messageService: NzMessageService) { }
 
@@ -77,6 +80,15 @@ export class HomeResourceViewComponent implements OnInit {
     this.resourceDetailComponent.pageTitle = "Update";
     this.resourceDetailComponent.isVisible = true;
     this.resourceDetailComponent.currentUser = this.currentUser;
+
+    if (this.currentUser) {
+      this.userFavoriteService.getUserFavoritesbyUser(this.currentUser.id)
+        .subscribe({
+          next: userFavorites => {
+            this.resourceDetailComponent.userFavorite = userFavorites.find(uf => uf.resource.id == selectedResource.id)!;
+          }
+        });
+    }
 
     selectedResource.clickCount++;
     this.resourceService.putResource(selectedResource.id, selectedResource)
