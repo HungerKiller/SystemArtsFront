@@ -1,3 +1,9 @@
+<div nz-col nzSpan="24">
+    <nz-select [(ngModel)]="selectedResourceType" (ngModelChange)="onSelectChange($event)">
+        <nz-option *ngFor="let r of resourceTypes" [nzValue]="r.id" [nzLabel]="r.name"></nz-option>
+    </nz-select>
+</div>
+
 <nz-image-group class="gallery" id="gallery" (window:resize)="onResize($event)">
     <div class="gallery-item" *ngFor="let resource of resources">
         <div class="content" (click)="openResource(resource)">
