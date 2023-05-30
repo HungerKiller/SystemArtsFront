@@ -77,6 +77,7 @@ export class DataVisualizationComponent implements OnInit, OnChanges {
       },
       xAxis: {
         type: 'category',
+        axisLabel: { interval: 0, rotate: 45 },
         data: this.xData
       },
       yAxis: {
