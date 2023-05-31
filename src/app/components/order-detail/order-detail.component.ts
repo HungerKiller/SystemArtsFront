@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { OrderStatusEnum } from 'src/app/models/Order';
+import { OrderStatusEnum, OrderStatusStrEnum } from 'src/app/models/Order';
 import { OrderProduct } from 'src/app/models/OrderProduct';
 import { User } from 'src/app/models/User';
 import { OrderService } from 'src/app/services/order.service';
@@ -68,7 +68,7 @@ export class OrderDetailComponent implements OnInit {
 
   getOrderStatusStr(statusKey: string): string {
     const enumKeys: string[] = Object.keys(OrderStatusEnum);
-    const enumValues: string[] = Object.values(OrderStatusEnum);
+    const enumValues: string[] = Object.values(OrderStatusStrEnum);
     let index = enumKeys.indexOf(statusKey);
     return enumValues[index];
   }

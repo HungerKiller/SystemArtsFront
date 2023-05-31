@@ -17,6 +17,14 @@ export class Order {
 }
 
 export enum OrderStatusEnum {
+    ACTIVE = "ACTIVE",
+    PAYED = "PAYED",
+    CONFIRMED = "CONFIRMED",
+    DELIVERED = "DELIVERED",
+    COMPLETED = "COMPLETED"
+}
+
+export enum OrderStatusStrEnum {
     ACTIVE = "未付款",
     PAYED = "已付款",
     CONFIRMED = "管理员已确认",

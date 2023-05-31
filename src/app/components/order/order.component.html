@@ -18,6 +18,12 @@
                     <td>{{ data.createdAt | date: 'medium' }}</td>
                     <td>{{ getOrderStatusStr(data.orderStatus) }}</td>
                     <td>
+                        <button nz-button nzType="primary" (click)="validateOrder(data)" nzTooltipTitle="审核通过"
+                            nzTooltipPlacement="topLeft" nz-tooltip>
+                            <i nz-icon nzType="like" nzTheme="fill"></i>
+                        </button>
+                        <nz-divider nzType="vertical"></nz-divider>
+
                         <button nz-button nzType="primary" (click)="editOrder(data)" nzTooltipTitle="编辑"
                             nzTooltipPlacement="topLeft" nz-tooltip>
                             <i nz-icon nzType="edit" nzTheme="fill"></i>

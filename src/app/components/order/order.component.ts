@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Order, OrderStatusEnum } from 'src/app/models/Order';
+import { Order, OrderStatusEnum, OrderStatusStrEnum } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
 
@@ -29,6 +29,20 @@ export class OrderComponent implements OnInit {
         next: orders => {
           this.loading = false;
           this.orders = orders;
+        }
+      });
+  }
+  
+  validateOrder(selectedOrder: Order): void {
+    this.orderStatus = OrderStatusEnum.CONFIRMED
+    this.orderService.putOrder(selectedOrder.id, { id: selectedOrder.id, user: selectedOrder.user, orderStatus: this.orderStatus, createdAt: selectedOrder.createdAt, orderProducts: selectedOrder.orderProducts })
+      .subscribe({
+        next: data => {
+          this.messageService.create("success", "审核通过成功!");
+          this.refresh();
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
         }
       });
   }
@@ -63,7 +77,7 @@ export class OrderComponent implements OnInit {
 
   getOrderStatusStr(status: OrderStatusEnum): string {
     const enumKeys: string[] = Object.keys(OrderStatusEnum);
-    const enumValues: string[] = Object.values(OrderStatusEnum);
+    const enumValues: string[] = Object.values(OrderStatusStrEnum);
     let index = enumKeys.indexOf(status);
     return enumValues[index];
   }
