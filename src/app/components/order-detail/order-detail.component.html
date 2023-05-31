@@ -21,9 +21,12 @@
                 <nz-list nzBordered>
                     <nz-list-item *ngFor="let product of orderProducts">
                         <mark>{{product.resource.title}}</mark>
-                        <nz-input-number [(ngModel)]="product.quantity" [nzMin]="1" [nzMax]="10" [nzStep]="1" disabled="true"></nz-input-number>
+                        <mark>单价：{{product.resource.price}}</mark>
+                        <mark>数量：{{product.quantity}}</mark>
+                        <!-- <nz-input-number [(ngModel)]="product.quantity" [nzMin]="1" [nzMax]="10" [nzStep]="1" disabled="true"></nz-input-number> -->
                     </nz-list-item>
                 </nz-list>
+                <mark>总价：{{totalPrice}}</mark>
             </div>
             </div>
     </ng-container>

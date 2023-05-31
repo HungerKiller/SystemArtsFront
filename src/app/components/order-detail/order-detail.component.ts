@@ -17,6 +17,8 @@ export class OrderDetailComponent implements OnInit {
   orderStatus!: OrderStatusEnum;
   orderProducts!: OrderProduct[];
   orderStatuses = Object.keys(OrderStatusEnum);
+  isCart!: boolean;
+  totalPrice!: number;
 
   pageTitle!: string;
   pageTitleChinese!: string;
@@ -39,7 +41,7 @@ export class OrderDetailComponent implements OnInit {
 
   submit(): void {
     if (this.pageTitle == "Update") {
-      this.orderService.putOrder(this.id, { id: this.id, user: this.user, orderStatus: this.orderStatus, createdAt: this.createdAt, orderProducts: this.orderProducts })
+      this.orderService.putOrder(this.id, { id: this.id, user: this.user, orderStatus: this.orderStatus, createdAt: this.createdAt, orderProducts: this.orderProducts, isCart: this.isCart })
         .subscribe({
           next: data => {
             this.messageService.create("success", "更新成功!");
@@ -52,7 +54,7 @@ export class OrderDetailComponent implements OnInit {
         });
     }
     else if (this.pageTitle == "Create") {
-      this.orderService.postOrder({ id: 0, user: this.user, orderStatus: this.orderStatus, createdAt: this.createdAt, orderProducts: this.orderProducts })
+      this.orderService.postOrder({ id: 0, user: this.user, orderStatus: this.orderStatus, createdAt: this.createdAt, orderProducts: this.orderProducts, isCart: this.isCart })
         .subscribe({
           next: data => {
             this.messageService.create("success", "创建成功!");

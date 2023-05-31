@@ -7,6 +7,7 @@ export class Order {
     orderStatus: OrderStatusEnum;
     createdAt!: Date;
     orderProducts: OrderProduct[];
+    isCart!: boolean;
 
     constructor(id: number, user: User, orderStatus: OrderStatusEnum, orderProducts: OrderProduct[]) {
         this.id = id;

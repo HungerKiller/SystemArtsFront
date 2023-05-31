@@ -35,7 +35,7 @@ export class OrderComponent implements OnInit {
   
   validateOrder(selectedOrder: Order): void {
     this.orderStatus = OrderStatusEnum.CONFIRMED
-    this.orderService.putOrder(selectedOrder.id, { id: selectedOrder.id, user: selectedOrder.user, orderStatus: this.orderStatus, createdAt: selectedOrder.createdAt, orderProducts: selectedOrder.orderProducts })
+    this.orderService.putOrder(selectedOrder.id, { id: selectedOrder.id, user: selectedOrder.user, orderStatus: this.orderStatus, createdAt: selectedOrder.createdAt, orderProducts: selectedOrder.orderProducts, isCart: selectedOrder.isCart })
       .subscribe({
         next: data => {
           this.messageService.create("success", "审核通过成功!");
@@ -53,9 +53,17 @@ export class OrderComponent implements OnInit {
     this.orderDetailComponent.createdAt = selectedOrder.createdAt;
     this.orderDetailComponent.orderProducts = selectedOrder.orderProducts;
     this.orderDetailComponent.orderStatus = selectedOrder.orderStatus;
+    this.orderDetailComponent.isCart = selectedOrder.isCart;
     this.orderDetailComponent.pageTitle = "Update";
     this.orderDetailComponent.pageTitleChinese = "编辑";
     this.orderDetailComponent.isVisible = true;
+
+    // Calculate total price
+    let totalPrice = 0;
+    for (let product of selectedOrder.orderProducts) {
+      totalPrice = totalPrice + product.resource.price * product.quantity;
+    }
+    this.orderDetailComponent.totalPrice = totalPrice;
   }
 
   deleteOrder(orderId: number): void {
