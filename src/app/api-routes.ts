@@ -66,4 +66,13 @@ export class ApiRoute {
         deleteUserFavorite: (userFavoriteId: number) => `${ApiRoute.BaseUrl}/user-favorites/${userFavoriteId}`,
         getUserFavoritesbyUser: (userId: number) => `${ApiRoute.BaseUrl}/user-favorites/byUser/${userId}`
     }
+
+    public static readonly ORDER = {
+        getOrders: () => `${ApiRoute.BaseUrl}/orders/`,
+        getOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`,
+        getOrdersByUserId: (userId: number) => `${ApiRoute.BaseUrl}/orders/byUser/${userId}`,
+        postOrder: () => `${ApiRoute.BaseUrl}/orders/`,
+        putOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`,
+        deleteOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`
+    }
 }

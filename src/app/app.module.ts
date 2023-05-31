@@ -61,6 +61,8 @@ import { HomeResourceEditComponent } from './components/home-resource-edit/home-
 import { HomeResourceEditDetailComponent } from './components/home-resource-edit-detail/home-resource-edit-detail.component';
 import { EchartsxModule } from 'echarts-for-angular';
 import { DataVisualizationComponent } from './components/data-visualization/data-visualization.component';
+import { OrderComponent } from './components/order/order.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 registerLocaleData(zh);
 
@@ -84,7 +86,9 @@ registerLocaleData(zh);
     HomeAnnouncementComponent,
     HomeResourceEditComponent,
     HomeResourceEditDetailComponent,
-    DataVisualizationComponent
+    DataVisualizationComponent,
+    OrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

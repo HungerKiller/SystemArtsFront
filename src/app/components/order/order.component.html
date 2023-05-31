@@ -1,0 +1,40 @@
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
+    <div nz-col [nzSpan]="24">
+        <nz-table #borderedTable nzBordered [nzShowSizeChanger]="true" [nzPageSizeOptions]='[5,10,20,30]'
+            [nzPageSize]="5" [nzShowTotal]="totalTemplate" [nzData]="orders" [nzLoading]="loading">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>所属用户</th>
+                    <th>创建于</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of borderedTable.data">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.user.username }}</td>
+                    <td>{{ data.createdAt | date: 'medium' }}</td>
+                    <td>{{ data.orderStatus }}</td>
+                    <td>
+                        <button nz-button nzType="primary" (click)="editOrder(data)" nzTooltipTitle="编辑"
+                            nzTooltipPlacement="topLeft" nz-tooltip>
+                            <i nz-icon nzType="edit" nzTheme="fill"></i>
+                        </button>
+                        <nz-divider nzType="vertical"></nz-divider>
+
+                        <button nz-button nzType="primary" nzDanger nzTooltipTitle="删除" nzTooltipPlacement="topLeft"
+                            nz-tooltip nz-popconfirm nzPopconfirmTitle="确认删除？" nzOkText="确认"
+                            nzCancelText="取消" (nzOnConfirm)="deleteOrder(data.id)">
+                            <i nz-icon nzType="delete" nzTheme="fill"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
+</div>
+
+<app-order-detail (isNeedRefresh)="refresh()"></app-order-detail>
