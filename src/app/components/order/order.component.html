@@ -16,7 +16,7 @@
                     <td>{{ data.id }}</td>
                     <td>{{ data.user.username }}</td>
                     <td>{{ data.createdAt | date: 'medium' }}</td>
-                    <td>{{ data.orderStatus }}</td>
+                    <td>{{ getOrderStatusStr(data.orderStatus) }}</td>
                     <td>
                         <button nz-button nzType="primary" (click)="editOrder(data)" nzTooltipTitle="编辑"
                             nzTooltipPlacement="topLeft" nz-tooltip>

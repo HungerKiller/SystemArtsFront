@@ -13,7 +13,7 @@
             <div nz-col nzSpan="24">
                 <nz-tag class="tag" [nzColor]="'cyan'">状态</nz-tag><br />
                 <nz-select [(ngModel)]="orderStatus" style="width:200px">
-                    <nz-option *ngFor="let status of orderStatuses" [nzValue]="status" [nzLabel]="status"></nz-option>
+                    <nz-option *ngFor="let status of orderStatuses" [nzValue]="status" [nzLabel]="getOrderStatusStr(status)"></nz-option>
                 </nz-select>
             </div>
             <div nz-col nzSpan="24">

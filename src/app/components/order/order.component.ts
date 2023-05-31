@@ -14,7 +14,6 @@ export class OrderComponent implements OnInit {
   @ViewChild(OrderDetailComponent) orderDetailComponent!: OrderDetailComponent;
   orders!: Order[];
   orderStatus!: OrderStatusEnum;
-  orderStatuses = Object.values(OrderStatusEnum);
   loading = true;
 
   constructor(private orderService: OrderService, private messageService: NzMessageService) { }
@@ -60,5 +59,12 @@ export class OrderComponent implements OnInit {
 
   refresh() {
     this.getOrders();
+  }
+
+  getOrderStatusStr(status: OrderStatusEnum): string {
+    const enumKeys: string[] = Object.keys(OrderStatusEnum);
+    const enumValues: string[] = Object.values(OrderStatusEnum);
+    let index = enumKeys.indexOf(status);
+    return enumValues[index];
   }
 }

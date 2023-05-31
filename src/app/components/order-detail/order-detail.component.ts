@@ -16,8 +16,7 @@ export class OrderDetailComponent implements OnInit {
   createdAt!: Date;
   orderStatus!: OrderStatusEnum;
   orderProducts!: OrderProduct[];
-
-  orderStatuses = Object.values(OrderStatusEnum);
+  orderStatuses = Object.keys(OrderStatusEnum);
 
   pageTitle!: string;
   pageTitleChinese!: string;
@@ -65,5 +64,12 @@ export class OrderDetailComponent implements OnInit {
           }
         });
     }
+  }
+
+  getOrderStatusStr(statusKey: string): string {
+    const enumKeys: string[] = Object.keys(OrderStatusEnum);
+    const enumValues: string[] = Object.values(OrderStatusEnum);
+    let index = enumKeys.indexOf(statusKey);
+    return enumValues[index];
   }
 }

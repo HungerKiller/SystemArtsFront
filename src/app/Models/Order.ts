@@ -17,17 +17,9 @@ export class Order {
 }
 
 export enum OrderStatusEnum {
-    ACTIVE = '未付款',
-    PAYED = '已付款',
-    CONFIRMED = '管理员已确认',
-    DELIVERED = '已发货',
-    COMPLETED = '已完成'
+    ACTIVE = "未付款",
+    PAYED = "已付款",
+    CONFIRMED = "管理员已确认",
+    DELIVERED = "已发货",
+    COMPLETED = "已完成"
 }
-
-export const OrderStatus2LabelMapping: Record<OrderStatusEnum, string> = {
-    [OrderStatusEnum.ACTIVE]: '未付款',
-    [OrderStatusEnum.PAYED]: '已付款',
-    [OrderStatusEnum.CONFIRMED]: '管理员已确认',
-    [OrderStatusEnum.DELIVERED]: '已发货',
-    [OrderStatusEnum.COMPLETED]: '已完成'
-};
