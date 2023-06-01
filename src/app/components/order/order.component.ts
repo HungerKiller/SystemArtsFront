@@ -50,6 +50,7 @@ export class OrderComponent implements OnInit {
   editOrder(selectedOrder: Order): void {
     this.orderDetailComponent.id = selectedOrder.id;
     this.orderDetailComponent.user = selectedOrder.user;
+    this.orderDetailComponent.username = selectedOrder.user.username;
     this.orderDetailComponent.createdAt = selectedOrder.createdAt;
     this.orderDetailComponent.orderProducts = selectedOrder.orderProducts;
     this.orderDetailComponent.orderStatus = selectedOrder.orderStatus;

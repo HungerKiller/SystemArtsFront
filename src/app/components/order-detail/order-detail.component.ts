@@ -13,6 +13,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderDetailComponent implements OnInit {
   id!: number;
   user!: User;
+  username!: string;
   createdAt!: Date;
   orderStatus!: OrderStatusEnum;
   orderProducts!: OrderProduct[];
