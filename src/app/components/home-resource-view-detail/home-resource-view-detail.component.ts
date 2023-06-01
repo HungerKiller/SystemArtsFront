@@ -1,11 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Comment } from 'src/app/models/Comment';
+import { OrderProduct } from 'src/app/models/OrderProduct';
 import { Resource } from 'src/app/models/Resource';
 import { ResourceType } from 'src/app/models/ResourceType';
 import { User } from 'src/app/models/User';
 import { UserFavorite } from 'src/app/models/UserFavorite';
 import { CommentService } from 'src/app/services/comment.service';
+import { OrderService } from 'src/app/services/order.service';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceService } from 'src/app/services/resource.service';
 import { UserFavoriteService } from 'src/app/services/user-favorite.service';
@@ -55,6 +57,7 @@ export class HomeResourceViewDetailComponent implements OnInit {
     private userFavoriteService: UserFavoriteService,
     private userService: UserService,
     private commentService: CommentService,
+    private orderService: OrderService,
     private messageService: NzMessageService) {
     this.getUsers();
     this.getResourceTypes();
@@ -94,16 +97,16 @@ export class HomeResourceViewDetailComponent implements OnInit {
     const content = this.inputValue;
     this.inputValue = '';
     this.commentService.postComment(new Comment(0, content, this.user!, this.resource!.id))
-        .subscribe({
-          next: data => {
-            this.messageService.create("success", "评论成功!");
-            this.close();
-            this.isNeedRefresh.emit();
-          },
-          error: error => {
-            this.messageService.create("error", error.error);
-          }
-        });
+      .subscribe({
+        next: data => {
+          this.messageService.create("success", "评论成功!");
+          this.close();
+          this.isNeedRefresh.emit();
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
   }
 
   changeFavorite(): void {
@@ -124,6 +127,40 @@ export class HomeResourceViewDetailComponent implements OnInit {
   }
 
   addToCart(): void {
-    
+    if (!this.currentUser) {
+      this.messageService.create("error", "用户未登录，不能使用购物车!");
+      return;
+    }
+
+    this.orderService.getCartOrderByUserId(this.currentUser?.id!)
+      .subscribe({
+        next: order => {
+          if (!order.orderProducts) {
+            order.orderProducts = [];
+          }
+          // Add to cart
+          let added = false;
+          for (let product of order.orderProducts) {
+            if (product.resource.id == this.resource?.id) {
+              product.quantity++;
+              added = true;
+            }
+          }
+
+          if (!added) {
+            order.orderProducts.push(new OrderProduct(0, order.id, this.resource!, 1));
+          }
+
+          // Update cart
+          this.orderService.putOrder(order.id, order).subscribe({
+            next: data => {
+              this.messageService.create("success", "成功添加至购物车!");
+            },
+            error: error => {
+              this.messageService.create("error", error.error);
+            }
+          });
+        }
+      });
   }
 }

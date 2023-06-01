@@ -17,6 +17,7 @@ export class HomeShoppingCartComponent implements OnInit {
   loading = true;
   currentUser: User | undefined;
   totalPrice: number = 0;
+  totalQuantity: number = 0;
 
   constructor(
     private orderService: OrderService,
@@ -35,10 +36,12 @@ export class HomeShoppingCartComponent implements OnInit {
           this.loading = false;
           this.order = order;
           this.orderProducts = order.orderProducts;
-          // Calculate total price
+          // Calculate total price and quantity
           this.totalPrice = 0;
+          this.totalQuantity = 0;
           for (let product of order.orderProducts) {
             this.totalPrice = this.totalPrice + product.resource.price * product.quantity;
+            this.totalQuantity = this.totalQuantity + product.quantity;
           }
         }
       });
@@ -57,7 +60,7 @@ export class HomeShoppingCartComponent implements OnInit {
   }
 
   deleteProduct(productId: number): void {
-
+    this.orderProducts = this.orderProducts.filter(p => p.id != productId);
   }
 
   submit() {
