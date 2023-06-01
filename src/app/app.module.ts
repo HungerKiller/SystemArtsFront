@@ -63,6 +63,7 @@ import { EchartsxModule } from 'echarts-for-angular';
 import { DataVisualizationComponent } from './components/data-visualization/data-visualization.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { HomeShoppingCartComponent } from './components/home-shopping-cart/home-shopping-cart.component';
 
 registerLocaleData(zh);
 
@@ -88,7 +89,8 @@ registerLocaleData(zh);
     HomeResourceEditDetailComponent,
     DataVisualizationComponent,
     OrderComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    HomeShoppingCartComponent
   ],
   imports: [
     BrowserModule,

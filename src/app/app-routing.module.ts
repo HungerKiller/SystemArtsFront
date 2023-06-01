@@ -14,6 +14,7 @@ import { HomeAnnouncementComponent } from './components/home-announcement/home-a
 import { HomeResourceEditComponent } from './components/home-resource-edit/home-resource-edit.component';
 import { DataVisualizationComponent } from './components/data-visualization/data-visualization.component';
 import { OrderComponent } from './components/order/order.component';
+import { HomeShoppingCartComponent } from './components/home-shopping-cart/home-shopping-cart.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home-announcement' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'home-resource-edit', component: HomeResourceEditComponent },
   { path: 'user-info-logout', component: UserInfoLogoutComponent },
   { path: 'user-login-register', component: UserLoginRegisterComponent },
+  { path: 'shopping-cart', component: HomeShoppingCartComponent },
   { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'resource-type', component: ResourceTypeComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },

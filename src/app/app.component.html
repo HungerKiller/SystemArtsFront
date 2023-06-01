@@ -42,6 +42,12 @@
           <span>用户个人信息</span>
         </a>
       </li>
+      <li nz-menu-item *ngIf="isUserConnected">
+        <a routerLink="/shopping-cart">
+          <i nz-icon nzType="shopping-cart"></i>
+          <span>购物车</span>
+        </a>
+      </li>
       <li nz-submenu nzOpen nzTitle="管理员" nzIcon="form" *ngIf="isAdmin">
         <ul>
           <li nz-menu-item nzMatchRouter>

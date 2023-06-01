@@ -71,6 +71,7 @@ export class ApiRoute {
         getOrders: () => `${ApiRoute.BaseUrl}/orders/`,
         getOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`,
         getOrdersByUserId: (userId: number) => `${ApiRoute.BaseUrl}/orders/byUser/${userId}`,
+        getCartOrderByUserId: (userId: number) => `${ApiRoute.BaseUrl}/orders/cartOrderByUser/${userId}`,
         postOrder: () => `${ApiRoute.BaseUrl}/orders/`,
         putOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`,
         deleteOrder: (orderId: number) => `${ApiRoute.BaseUrl}/orders/${orderId}`

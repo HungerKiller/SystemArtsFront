@@ -26,6 +26,10 @@ export class OrderService {
     getOrdersByUserId(userId: number): Observable<Order[]> {
         return this.http.get<Order[]>(ApiRoute.ORDER.getOrdersByUserId(userId), { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
     }
+    
+    getCartOrderByUserId(userId: number): Observable<Order> {
+        return this.http.get<Order>(ApiRoute.ORDER.getCartOrderByUserId(userId), { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
+    }
 
     postOrder(order: Order): Observable<Order> {
         return this.http.post<Order>(ApiRoute.ORDER.postOrder(), order, { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
