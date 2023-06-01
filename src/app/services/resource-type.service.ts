@@ -16,7 +16,7 @@ export class ResourceTypeService {
   constructor(private http: HttpClient) { }
 
   getResourceTypes(): Observable<ResourceType[]> {
-    return this.http.get<ResourceType[]>(ApiRoute.RESOURCETYPE.getResourceTypes(), {headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`)});
+    return this.http.get<ResourceType[]>(ApiRoute.RESOURCETYPE.getResourceTypes());
   }
 
   getResourceType(resourceTypeId: number): Observable<ResourceType> {
