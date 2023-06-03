@@ -1,6 +1,10 @@
 <div nz-col nzSpan="24">
-    <nz-select [(ngModel)]="selectedResourceType" (ngModelChange)="onSelectChange($event)">
+    <nz-select [(ngModel)]="selectedResourceType" (ngModelChange)="onSelectResourceTypeChange($event)">
         <nz-option *ngFor="let r of resourceTypes" [nzValue]="r.id" [nzLabel]="r.name"></nz-option>
+    </nz-select>
+
+    <nz-select *ngIf="currentUser" style="width: 100px" [(ngModel)]="selectedUserFavorite" (ngModelChange)="onSelectedUserFavoriteChange($event)">
+        <nz-option *ngFor="let favorite of userFavorites" [nzValue]="favorite.id" [nzLabel]="favorite.name"></nz-option>
     </nz-select>
 </div>
 

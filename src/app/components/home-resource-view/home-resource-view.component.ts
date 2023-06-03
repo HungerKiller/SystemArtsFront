@@ -27,6 +27,8 @@ export class HomeResourceViewComponent implements OnInit {
   currentUser: User | undefined;
   resourceTypes!: ResourceType[];
   selectedResourceType: any;
+  userFavorites: any[] = [{ id: 1, name: "所有" }, { id: 2, name: "仅我收藏" }];
+  selectedUserFavorite: any = 1;
 
   constructor(
     private resourceService: ResourceService,
@@ -65,6 +67,33 @@ export class HomeResourceViewComponent implements OnInit {
           }
         }
       });
+  }
+
+  getResourcesOnlyFavorite(): void {
+    this.loading = true;
+    if (this.currentUser) {
+      this.userFavoriteService.getUserFavoritesbyUser(this.currentUser.id)
+        .subscribe({
+          next: userFavorites => {
+            this.loading = false;
+            let resources = userFavorites.map(f => f.resource);
+            // Filter by resource type
+            if (this.selectedResourceType == 0) {
+              this.resources = resources;
+            }
+            else {
+              this.resources = resources.filter(r => r.resourceType.id == this.selectedResourceType);
+            }
+
+            // Set resource file path
+            for (let resource of resources) {
+              resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
+              resource.resourceFilesPath = [];
+              resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
+            }
+          }
+        });
+    }
   }
 
   getResourceTypes(): void {
@@ -127,9 +156,24 @@ export class HomeResourceViewComponent implements OnInit {
         });
   }
 
-  onSelectChange(event: any) {
-    this.getResources();
+  onSelectResourceTypeChange(event: any) {
+    if (this.selectedUserFavorite == 2) {
+      this.getResourcesOnlyFavorite();
+    }
+    else {
+      this.getResources();
+    }
   }
+
+  onSelectedUserFavoriteChange(event: any) {
+    if (event == 2) {
+      this.getResourcesOnlyFavorite();
+    }
+    else {
+      this.getResources();
+    }
+  }
+  
 
   refresh() {
     this.getResources();
