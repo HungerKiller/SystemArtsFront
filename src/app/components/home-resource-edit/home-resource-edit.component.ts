@@ -147,19 +147,6 @@ export class HomeResourceEditComponent implements OnInit {
     upload.click();
   }
 
-  // todo use resourceFileId
-  downloadResource(resourceId: number): void {
-    this.resourceFileService.downloadResourceFile(resourceId)
-      .subscribe({
-        next: data => {
-          this.messageService.create("success", `File is downloaded successfully!`);
-        },
-        error: error => {
-          this.messageService.create("error", error.error);
-        }
-      });
-  }
-
   deleteResource(resourceId: number): void {
     this.resourceService.deleteResource(resourceId)
       .subscribe({

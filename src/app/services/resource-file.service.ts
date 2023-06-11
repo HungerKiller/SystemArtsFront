@@ -36,8 +36,8 @@ export class ResourceFileService {
         return this.http.delete<Resource>(ApiRoute.RESOURCEFILE.deleteResourceFile(resourceFileId), { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
     }
 
-    // todo return type as any => it is ok?
     downloadResourceFile(resourceFileId: number): Observable<any> {
-        return this.http.get<any>(ApiRoute.RESOURCEFILE.downloadResourceFile(resourceFileId), { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
+        let headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+        return this.http.get<any>(ApiRoute.RESOURCEFILE.downloadResourceFile(resourceFileId), { responseType: 'blob' as 'json', headers: headers });
     }
 }

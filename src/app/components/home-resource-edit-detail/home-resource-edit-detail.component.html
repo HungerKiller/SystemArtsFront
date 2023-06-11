@@ -35,8 +35,9 @@
                     <tbody>
                         <tr *ngFor="let data of borderedTable.data">
                             <td>{{ data.name }}</td>
-                            <td><img class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
-                                    alt="" />
+                            <td><img *ngIf="isImage(data.name)" class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
+                                    alt="{{data.name}}" />
+                                <span *ngIf="!isImage(data.name)">{{data.name}}</span>
                             </td>
                             <td style="width:30%">
                                 <span *ngIf="!data.isValid">

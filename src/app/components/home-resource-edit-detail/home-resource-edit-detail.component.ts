@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import Utils from 'src/app/Helpers/Utils';
 import { ApiRoute } from 'src/app/api-routes';
 import { Comment } from 'src/app/models/Comment';
 import { Resource } from 'src/app/models/Resource';
@@ -144,7 +145,23 @@ export class HomeResourceEditDetailComponent implements OnInit {
       });
   }
 
-  downloadResourceFile(resourceFile: ResourceFile){}  
+  downloadResourceFile(resourceFile: ResourceFile){
+    this.resourceFileService.downloadResourceFile(resourceFile.id)
+      .subscribe({
+        next: (response: Blob) => {
+          const downloadUrl = URL.createObjectURL(response);
+          const link = document.createElement('a');
+          link.href = downloadUrl;
+          link.download = resourceFile.name;
+          link.click();
+          URL.revokeObjectURL(downloadUrl);
+          this.messageService.create("success", "下载成功!");
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
+  }
 
   deleteResourceFile(resourceFile: ResourceFile){
     this.resourceFileService.deleteResourceFile(resourceFile.id)
@@ -170,5 +187,9 @@ export class HomeResourceEditDetailComponent implements OnInit {
           this.resourceFiles = resource.resourceFiles;
         }
       });
+  }
+
+  isImage(name: string): boolean {
+    return Utils.isImageFileName(name);
   }
 }
