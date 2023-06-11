@@ -24,7 +24,7 @@ export class OrderDetailComponent implements OnInit {
   pageTitle!: string;
   pageTitleChinese!: string;
   isVisible!: boolean;
-  disableRole!: boolean;
+  disableStatus!: boolean;
 
   @Output() isNeedRefresh = new EventEmitter<boolean>();
 

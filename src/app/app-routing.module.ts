@@ -24,12 +24,12 @@ const routes: Routes = [
   { path: 'user-info-logout', component: UserInfoLogoutComponent },
   { path: 'user-login-register', component: UserLoginRegisterComponent },
   { path: 'shopping-cart', component: HomeShoppingCartComponent },
+  { path: 'order', component: OrderComponent },
   { path: 'announcement', component: AnnouncementComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'resource-type', component: ResourceTypeComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'user-favorite', component: UserFavoriteComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'comment', component: CommentComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
-  { path: 'order', component: OrderComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } },
   { path: 'data-visualization', component: DataVisualizationComponent, canActivate: [AuthGuard], data: { roles: [RoleEnum.ADMIN] } }
 ];
 

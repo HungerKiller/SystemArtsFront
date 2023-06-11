@@ -1,7 +1,7 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
     <div nz-col [nzSpan]="24">
         <nz-table #borderedTable nzBordered [nzShowSizeChanger]="true" [nzPageSizeOptions]='[5,10,20,30]'
-            [nzPageSize]="5" [nzShowTotal]="totalTemplate" [nzData]="orders" [nzLoading]="loading">
+            [nzPageSize]="7" [nzShowTotal]="totalTemplate" [nzData]="orders" [nzLoading]="loading">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -18,11 +18,37 @@
                     <td>{{ data.createdAt | date: 'medium' }}</td>
                     <td>{{ getOrderStatusStr(data.orderStatus) }}</td>
                     <td>
-                        <button nz-button nzType="primary" (click)="validateOrder(data)" nzTooltipTitle="审核通过"
-                            nzTooltipPlacement="topLeft" nz-tooltip>
-                            <i nz-icon nzType="like" nzTheme="fill"></i>
-                        </button>
-                        <nz-divider nzType="vertical"></nz-divider>
+                        <span *ngIf="data.orderStatus != 'RETURN_REQUEST' && data.orderStatus != 'RETURNED' && data.orderStatus != 'COMPLETED'">
+                            <button nz-button nzType="primary" (click)="requestReturnOrder(data)" nzTooltipTitle="申请退货" nzTooltipPlacement="topLeft"
+                                nz-tooltip>
+                                <i nz-icon nzType="question" nzTheme="outline"></i>
+                            </button>
+                            <nz-divider nzType="vertical"></nz-divider>
+                        </span>
+
+                        <span *ngIf="data.orderStatus == 'SHIPPED'">
+                            <button nz-button nzType="primary" (click)="validateReceivedOrder(data)" nzTooltipTitle="确认收货" nzTooltipPlacement="topLeft"
+                                nz-tooltip>
+                                <i nz-icon nzType="like" nzTheme="fill"></i>
+                            </button>
+                            <nz-divider nzType="vertical"></nz-divider>
+                        </span>
+
+                        <span *ngIf="isAdmin && data.orderStatus == 'PAID'">
+                            <button nz-button nzType="primary" (click)="validateShippedOrder(data)" nzTooltipTitle="确认发货" nzTooltipPlacement="topLeft"
+                                nz-tooltip>
+                                <i nz-icon nzType="send" nzTheme="outline"></i>
+                            </button>
+                            <nz-divider nzType="vertical"></nz-divider>
+                        </span>
+
+                        <span *ngIf="isAdmin && data.orderStatus == 'RETURN_REQUEST'">
+                            <button nz-button nzType="primary" (click)="validateReturnedOrder(data)" nzTooltipTitle="确认退货" nzTooltipPlacement="topLeft"
+                                nz-tooltip>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </button>
+                            <nz-divider nzType="vertical"></nz-divider>
+                        </span>
 
                         <button nz-button nzType="primary" (click)="editOrder(data)" nzTooltipTitle="编辑"
                             nzTooltipPlacement="topLeft" nz-tooltip>

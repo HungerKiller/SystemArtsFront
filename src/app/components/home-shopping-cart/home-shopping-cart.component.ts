@@ -5,6 +5,7 @@ import { OrderProduct } from 'src/app/models/OrderProduct';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-shopping-cart',
@@ -20,6 +21,7 @@ export class HomeShoppingCartComponent implements OnInit {
   totalQuantity: number = 0;
 
   constructor(
+    private userService: UserService,
     private orderService: OrderService,
     private authService: AuthService,
     private messageService: NzMessageService) { }
@@ -64,6 +66,11 @@ export class HomeShoppingCartComponent implements OnInit {
   }
 
   submit() {
+    if (!this.order.orderProducts || this.order.orderProducts.length == 0) {
+      this.messageService.create("error", "购物车为空，请向购物车添加资源!");
+      return;
+    }
+
     this.order.orderProducts = this.orderProducts;
     this.orderService.putOrder(this.order.id, this.order).subscribe({
       next: data => {
@@ -76,16 +83,37 @@ export class HomeShoppingCartComponent implements OnInit {
     });
   }
 
-  pay() { 
-    this.order.orderStatus = OrderStatusEnum.PAYED;
-    this.orderService.putOrder(this.order.id, this.order).subscribe({
-      next: data => {
-        this.messageService.create("success", "付款成功!");
-        this.getCurrentUser();
-      },
-      error: error => {
-        this.messageService.create("error", error.error);
-      }
-    });
+  pay() {
+    if (!this.order.orderProducts || this.order.orderProducts.length == 0) {
+      this.messageService.create("error", "购物车为空，请向购物车添加资源!");
+      return;
+    }
+
+    if (this.currentUser?.money! < this.totalPrice) {
+      this.messageService.create("error", "付款失败，余额不足，请充值!");
+      return;
+    }
+
+    var totalMoney = this.currentUser?.money! - this.totalPrice;
+    this.userService.putUser(this.currentUser?.id!, { id: this.currentUser?.id!, username: this.currentUser?.username!, password: this.currentUser?.password!, email: this.currentUser?.email!, age: this.currentUser?.age, money: totalMoney, role: this.currentUser?.role! })
+      .subscribe({
+        next: data => {
+          this.order.orderStatus = OrderStatusEnum.PAID;
+          this.order.isCart = false;
+          this.orderService.putOrder(this.order.id, this.order).subscribe({
+            next: data => {
+              this.messageService.create("success", "付款成功!");
+              this.getCurrentUser();
+            },
+            error: error => {
+              this.messageService.create("error", error.error);
+            }
+          });
+
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
   }
 }

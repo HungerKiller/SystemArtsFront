@@ -48,6 +48,12 @@
           <span>购物车</span>
         </a>
       </li>
+      <li nz-menu-item *ngIf="isUserConnected">
+        <a routerLink="/order">
+          <i nz-icon nzType="shopping"></i>
+          <span>订单管理</span>
+        </a>
+      </li>
       <li nz-submenu nzOpen nzTitle="管理员" nzIcon="form" *ngIf="isAdmin">
         <ul>
           <li nz-menu-item nzMatchRouter>
@@ -64,9 +70,6 @@
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/comment">评论管理</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order">订单管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/data-visualization">数据可视化</a>

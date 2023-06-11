@@ -50,6 +50,7 @@ export class UserInfoLogoutComponent implements OnInit {
       this.userDetailComponent.password = this.currentUser.password;
       this.userDetailComponent.email = this.currentUser.email;
       this.userDetailComponent.age = this.currentUser.age;
+      this.userDetailComponent.money = this.currentUser.money;
       this.userDetailComponent.role = this.currentUser.role;
       this.userDetailComponent.pageTitle = "Update";
       this.userDetailComponent.pageTitleChinese = "编辑";

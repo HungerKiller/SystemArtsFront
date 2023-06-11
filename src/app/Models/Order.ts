@@ -18,17 +18,19 @@ export class Order {
 }
 
 export enum OrderStatusEnum {
-    ACTIVE = "ACTIVE",
-    PAYED = "PAYED",
-    CONFIRMED = "CONFIRMED",
-    DELIVERED = "DELIVERED",
-    COMPLETED = "COMPLETED"
+    PAID = "PAID",
+    SHIPPED = "SHIPPED",
+    RETURN_REQUEST = "RETURN_REQUEST",
+    RETURNED = "RETURNED",
+    RECEIVED = "RECEIVED",
+    COMPLETED  = "COMPLETED"
 }
 
 export enum OrderStatusStrEnum {
-    ACTIVE = "未付款",
-    PAYED = "已付款",
-    CONFIRMED = "管理员已确认",
-    DELIVERED = "已发货",
+    PAID = "已付款",
+    SHIPPED = "已发货",
+    RETURN_REQUEST = "申请退货中",
+    RETURNED = "已退货",
+    RECEIVED = "已收货",
     COMPLETED = "已完成"
 }

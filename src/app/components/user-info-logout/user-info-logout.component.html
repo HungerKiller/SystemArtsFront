@@ -17,7 +17,7 @@
             <ng-container *nzModalContent>
                 <div nz-col nzSpan="24">
                     <nz-tag [nzColor]="'#87d068'" style="font-size: 18px;">充值金额</nz-tag>
-                    <nz-input-number [(ngModel)]="rechargeMoney" [nzMin]="1" [nzMax]="99999999" [nzStep]="1"></nz-input-number> ¥
+                    <nz-input-number [(ngModel)]="rechargeMoney" [nzMin]="0.00000001" [nzMax]="99999999" [nzStep]="1"></nz-input-number> ¥
                 </div>
                 <nz-radio-group [(ngModel)]="radioValue">
                     <label nz-radio nzValue="A">

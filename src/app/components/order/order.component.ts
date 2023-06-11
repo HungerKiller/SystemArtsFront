@@ -3,6 +3,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Order, OrderStatusEnum, OrderStatusStrEnum } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { RoleEnum, User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-order',
@@ -15,11 +17,15 @@ export class OrderComponent implements OnInit {
   orders!: Order[];
   orderStatus!: OrderStatusEnum;
   loading = true;
+  currentUser: User | undefined;
 
-  constructor(private orderService: OrderService, private messageService: NzMessageService) { }
+  constructor(
+    private orderService: OrderService,
+    private authService: AuthService,
+    private messageService: NzMessageService) { }
 
   ngOnInit() {
-    this.getOrders();
+    this.getCurrentUser();
   }
 
   getOrders(): void {
@@ -28,17 +34,74 @@ export class OrderComponent implements OnInit {
       .subscribe({
         next: orders => {
           this.loading = false;
-          this.orders = orders;
+          this.orders = orders.filter(o => !o.isCart);
         }
       });
   }
+
+  getOrdersByUser(userId: number): void {
+    this.loading = true;
+    this.orderService.getOrdersByUserId(userId)
+      .subscribe({
+        next: orders => {
+          this.loading = false;
+          this.orders = orders.filter(o => !o.isCart);
+        }
+      });
+  }
+
+  getOrdersByUserRole() {
+    if (this.currentUser) {
+      if (this.currentUser!.role == RoleEnum.ADMIN) {
+        this.getOrders();
+      }
+      else {
+        this.getOrdersByUser(this.currentUser!.id);
+      }
+    }
+    else {
+      this.orders = [];
+    }
+  }
   
-  validateOrder(selectedOrder: Order): void {
-    this.orderStatus = OrderStatusEnum.CONFIRMED
-    this.orderService.putOrder(selectedOrder.id, { id: selectedOrder.id, user: selectedOrder.user, orderStatus: this.orderStatus, createdAt: selectedOrder.createdAt, orderProducts: selectedOrder.orderProducts, isCart: selectedOrder.isCart })
+  getCurrentUser(): void {
+    this.authService.currentUser().subscribe(user => {
+      if (user) {
+        this.currentUser = user;
+        this.getOrdersByUserRole();
+      }
+      else {
+        this.currentUser = undefined;
+      }
+    });
+  }
+
+  get isAdmin(): boolean {
+    return this.currentUser!.role == RoleEnum.ADMIN;
+  }
+
+  requestReturnOrder(selectedOrder: Order): void {
+    this.updateOrderStatus(selectedOrder, OrderStatusEnum.RETURN_REQUEST, "申请退货成功!");
+  }
+
+  validateReceivedOrder(selectedOrder: Order): void {
+    this.updateOrderStatus(selectedOrder, OrderStatusEnum.RECEIVED, "确认收货成功!");
+  }
+
+  validateShippedOrder(selectedOrder: Order): void {
+    this.updateOrderStatus(selectedOrder, OrderStatusEnum.SHIPPED, "确认发货!");
+  }
+
+  validateReturnedOrder(selectedOrder: Order): void {
+    this.updateOrderStatus(selectedOrder, OrderStatusEnum.RETURNED, "确认退货!");
+  }
+
+
+  updateOrderStatus(selectedOrder: Order, orderStatus: OrderStatusEnum, message: string): void {
+    this.orderService.putOrder(selectedOrder.id, { id: selectedOrder.id, user: selectedOrder.user, orderStatus: orderStatus, createdAt: selectedOrder.createdAt, orderProducts: selectedOrder.orderProducts, isCart: selectedOrder.isCart })
       .subscribe({
         next: data => {
-          this.messageService.create("success", "审核通过成功!");
+          this.messageService.create("success", message);
           this.refresh();
         },
         error: error => {
@@ -58,6 +121,7 @@ export class OrderComponent implements OnInit {
     this.orderDetailComponent.pageTitle = "Update";
     this.orderDetailComponent.pageTitleChinese = "编辑";
     this.orderDetailComponent.isVisible = true;
+    this.orderDetailComponent.disableStatus = !this.isAdmin;
 
     // Calculate total price
     let totalPrice = 0;
@@ -72,7 +136,7 @@ export class OrderComponent implements OnInit {
       .subscribe({
         next: data => {
           this.messageService.create("success", "删除成功!");
-          this.getOrders();
+          this.refresh();
         },
         error: error => {
           this.messageService.create("error", error.error);
@@ -81,7 +145,7 @@ export class OrderComponent implements OnInit {
   }
 
   refresh() {
-    this.getOrders();
+    this.getOrdersByUserRole();
   }
 
   getOrderStatusStr(status: OrderStatusEnum): string {
