@@ -1,13 +1,14 @@
-<div nz-col nzSpan="24">
+<div nz-col nzSpan="24" class="filter">
     <nz-select [(ngModel)]="selectedResourceType" (ngModelChange)="onSelectResourceTypeChange($event)">
         <nz-option *ngFor="let r of resourceTypes" [nzValue]="r.id" [nzLabel]="r.name"></nz-option>
     </nz-select>
 
-    <nz-select *ngIf="currentUser" style="width: 100px" [(ngModel)]="selectedUserFavorite" (ngModelChange)="onSelectedUserFavoriteChange($event)">
+    <nz-select *ngIf="currentUser" style="width: 100px; padding-left: 8px;" [(ngModel)]="selectedUserFavorite" (ngModelChange)="onSelectedUserFavoriteChange($event)">
         <nz-option *ngFor="let favorite of userFavorites" [nzValue]="favorite.id" [nzLabel]="favorite.name"></nz-option>
     </nz-select>
 </div>
 
+<!-- 
 <nz-image-group class="gallery" id="gallery" (window:resize)="onResize($event)">
     <div class="gallery-item" *ngFor="let resource of resources">
         <div class="content" (click)="openResource(resource)">
@@ -15,6 +16,16 @@
                 nzSrc="{{resource.firstResouceFilePath}}" [nzFallback]="fallback" alt="" />
         </div>
     </div>
-</nz-image-group>
+</nz-image-group> -->
+
+<div nz-row [nzGutter]="[16, 24]">
+    <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let resource of resources">
+        <div class="listing" (click)="openResource(resource)">
+            <img class="listing-photo" [nzDisablePreview]="true" nz-image nzSrc="{{resource.firstResouceFilePath}}"
+                [nzFallback]="fallback" alt="" />
+            <span class="listing-heading">{{ resource.title }}</span>
+        </div>
+    </div>
+</div>
 
 <app-home-resource-view-detail (isNeedRefresh)="refresh()"></app-home-resource-view-detail>
