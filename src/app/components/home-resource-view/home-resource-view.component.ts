@@ -13,6 +13,8 @@ import { ResourceType } from 'src/app/models/ResourceType';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceFile } from 'src/app/models/ResourceFile';
 import Utils from 'src/app/Helpers/Utils';
+import { OrderService } from 'src/app/services/order.service';
+import { OrderStatusEnum } from 'src/app/models/Order';
 
 @Component({
   selector: 'app-home-resource-view',
@@ -32,12 +34,14 @@ export class HomeResourceViewComponent implements OnInit {
   userFavorites: any[] = [{ id: 1, name: "所有" }, { id: 2, name: "仅我收藏" }];
   selectedUserFavorite: any = 1;
   searchValue!: string;
+  paidResource!: Resource[];
 
   constructor(
     private resourceService: ResourceService,
     private resourceFileService: ResourceFileService,
     private userFavoriteService: UserFavoriteService,
     private resourceTypeService: ResourceTypeService,
+    private orderService: OrderService,
     private authService: AuthService,
     private messageService: NzMessageService) {
     }
@@ -108,6 +112,11 @@ export class HomeResourceViewComponent implements OnInit {
     this.authService.currentUser().subscribe(user => {
       if (user) {
         this.currentUser = user;
+        this.orderService.getOrdersByUserId(user.id).subscribe(orders => {
+          var orders = orders.filter(o => o.orderStatus == OrderStatusEnum.COMPLETED || o.orderStatus == OrderStatusEnum.RECEIVED)
+          this.paidResource = [];
+          orders.forEach(o => o.orderProducts.forEach(p => this.paidResource.push(p.resource)));
+        });
       }
       else {
         this.currentUser = undefined;
@@ -133,6 +142,8 @@ export class HomeResourceViewComponent implements OnInit {
     this.resourceDetailComponent.isVisible = true;
     this.resourceDetailComponent.currentUser = this.currentUser;
 
+    this.resourceDetailComponent.canDownload = this.paidResource.findIndex(r => r.id == selectedResource.id) > 0;
+
     if (this.currentUser) {
       this.userFavoriteService.getUserFavoritesbyUser(this.currentUser.id)
         .subscribe({
@@ -140,10 +151,9 @@ export class HomeResourceViewComponent implements OnInit {
             this.resourceDetailComponent.userFavorite = userFavorites.find(uf => uf.resource.id == selectedResource.id)!;
           }
         });
-    }
 
-    selectedResource.clickCount++;
-    this.resourceService.putResource(selectedResource.id, selectedResource)
+      selectedResource.clickCount++;
+      this.resourceService.putResource(selectedResource.id, selectedResource)
         .subscribe({
           next: data => {
             this.messageService.create("success", "打开成功，点击次数加1");
@@ -152,6 +162,7 @@ export class HomeResourceViewComponent implements OnInit {
             this.messageService.create("error", error.error);
           }
         });
+    }
   }
 
   onSelectResourceTypeChange(event: any) {

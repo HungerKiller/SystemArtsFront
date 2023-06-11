@@ -53,6 +53,8 @@ export class HomeResourceViewDetailComponent implements OnInit {
   // isFavorite
   userFavorite: UserFavorite | undefined;
 
+  canDownload!: boolean;
+
   @Output() isNeedRefresh = new EventEmitter<boolean>();
 
   constructor(

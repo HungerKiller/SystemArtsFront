@@ -115,7 +115,7 @@
                                     <span *ngIf="!isImage(data.name) && !isVideo(data.name)">{{data.name}}</span>
                                 </td>
                                 <td>
-                                    <button nz-button nzType="primary" (click)="downloadResourceFile(data)"
+                                    <button *ngIf="currentUser && canDownload" nz-button nzType="primary" (click)="downloadResourceFile(data)"
                                         nzTooltipTitle="下载" nzTooltipPlacement="topLeft" nz-tooltip>
                                         <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
                                     </button>
