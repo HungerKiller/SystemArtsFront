@@ -43,7 +43,7 @@ export class HomeResourceEditComponent implements OnInit {
           this.resources = resources;
           // Set resource file path
           for (let resource of resources) {
-            resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
+            resource.firstPhotoPath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
             resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
           }
         }
@@ -59,7 +59,7 @@ export class HomeResourceEditComponent implements OnInit {
           this.resources = resources;
           // Set resource file path
           for (let resource of resources) {
-            resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
+            resource.firstPhotoPath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
             resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
           }
         }
