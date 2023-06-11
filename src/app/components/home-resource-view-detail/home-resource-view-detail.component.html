@@ -1,65 +1,131 @@
-<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="600" [nzVisible]="isVisible"
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="800" [nzVisible]="isVisible"
     nzTitle="资源详细信息" (nzOnClose)="close()">
     <ng-container *nzDrawerContent>
-        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
-            <div nz-col nzSpan="24">
-                <nz-carousel nzAutoPlay>
-                    <div nz-carousel-content *ngFor="let file of resourceFiles">
-                        <img nz-image class="img" [nzSrc]="file.pathWithHostUrl" alt="" />
+        <nz-tabset>
+            <nz-tab nzTitle="信息">
+                <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
+                    <div nz-col nzSpan="24">
+                        <nz-carousel nzAutoPlay>
+                            <div nz-carousel-content *ngFor="let file of resourcePhotoFiles">
+                                <img *ngIf="isImage(file.name)" nz-image class="img" [nzSrc]="file.pathWithHostUrl" alt="" />
+                                <video *ngIf="isVideo(file.name)" class="img" controls>
+                                    <source src="{{file.pathWithHostUrl}}" type="video/mp4">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/quicktime">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/x-msvideo">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/x-ms-wmv">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/x-flv">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/x-matroska">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/mpeg">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/webm">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/3gpp">
+                                    <source src="{{file.pathWithHostUrl}}" type="application/vnd.rn-realmedia-vbr">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/x-m4v">
+                                    <source src="{{file.pathWithHostUrl}}" type="video/dvd">
+                                    您的浏览器不支持播放视频文件
+                                </video>
+                            </div>
+                        </nz-carousel>
                     </div>
-                </nz-carousel>
-            </div>
 
-            <div *ngIf="currentUser" class="functions" nz-col nzSpan="24">
-                <button nz-button nzType="primary" nzShape="circle" (click)="addToCart()" nzTooltipTitle="加入购物车" nzTooltipPlacement="topLeft"
-                    nz-tooltip>
-                    <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
-                </button>
-                <span class="like" nz-icon nzType="heart" [nzTheme]="userFavorite ? 'fill' : 'outline'"
-                    (click)="changeFavorite()"></span>
-            </div>
+                    <div *ngIf="currentUser" class="functions" nz-col nzSpan="24">
+                        <button nz-button nzType="primary" nzShape="circle" (click)="addToCart()" nzTooltipTitle="加入购物车"
+                            nzTooltipPlacement="topLeft" nz-tooltip>
+                            <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+                        </button>
+                        <span class="like" nz-icon nzType="heart" [nzTheme]="userFavorite ? 'fill' : 'outline'"
+                            (click)="changeFavorite()"></span>
+                    </div>
 
-            <div nz-col nzSpan="24">
-                <nz-divider class="title" nzText="基本信息" nzOrientation="left"></nz-divider>
-                <nz-descriptions>
-                    <nz-descriptions-item nzTitle="标题">{{title}}</nz-descriptions-item>
-                    <nz-descriptions-item nzTitle="资源类型">{{resourceType?.name}}</nz-descriptions-item>
-                    <nz-descriptions-item nzTitle="价格">{{price}}</nz-descriptions-item>
-                    <nz-descriptions-item nzTitle="创建者">{{user?.username}}</nz-descriptions-item>
-                    <nz-descriptions-item nzTitle="创建时间" [nzSpan]="2">{{createdAt}}</nz-descriptions-item>
-                    <nz-descriptions-item nzTitle="描述" [nzSpan]="3">{{description}}</nz-descriptions-item>
-                </nz-descriptions>
-            </div>
+                    <div nz-col nzSpan="24">
+                        <nz-divider class="title" nzText="基本信息" nzOrientation="left"></nz-divider>
+                        <nz-descriptions>
+                            <nz-descriptions-item nzTitle="标题">{{title}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="资源类型">{{resourceType?.name}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="价格">{{price}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="创建者">{{user?.username}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="创建时间" [nzSpan]="2">{{createdAt}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="描述" [nzSpan]="3">{{description}}</nz-descriptions-item>
+                        </nz-descriptions>
+                    </div>
 
-            <div nz-col nzSpan="24">
-                <nz-divider class="title" nzText="评论" nzOrientation="left"></nz-divider>
-                <nz-list [nzDataSource]="comments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
-                    <ng-template #item let-item>
-                        <nz-comment [nzAuthor]="item.user.username" [nzDatetime]="item.createdAt">
+                    <div nz-col nzSpan="24">
+                        <nz-divider class="title" nzText="评论" nzOrientation="left"></nz-divider>
+                        <nz-list [nzDataSource]="comments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                            <ng-template #item let-item>
+                                <nz-comment [nzAuthor]="item.user.username" [nzDatetime]="item.createdAt">
+                                    <nz-avatar nz-comment-avatar nzIcon="user"
+                                        style="background-color:#87d068;"></nz-avatar>
+                                    <nz-comment-content>
+                                        <p>{{ item.content }}</p>
+                                    </nz-comment-content>
+                                    <nz-comment-action>Reply to</nz-comment-action>
+                                </nz-comment>
+                            </ng-template>
+                        </nz-list>
+
+                        <nz-comment *ngIf="currentUser">
                             <nz-avatar nz-comment-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
                             <nz-comment-content>
-                                <p>{{ item.content }}</p>
+                                <nz-form-item>
+                                    <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                                        (click)="handleSubmit()">
+                                        添加评论
+                                    </button>
+                                </nz-form-item>
                             </nz-comment-content>
-                            <nz-comment-action>Reply to</nz-comment-action>
                         </nz-comment>
-                    </ng-template>
-                </nz-list>
+                    </div>
+                </div>
+            </nz-tab>
 
-                <nz-comment *ngIf="currentUser">
-                    <nz-avatar nz-comment-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
-                    <nz-comment-content>
-                        <nz-form-item>
-                            <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
-                        </nz-form-item>
-                        <nz-form-item>
-                            <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
-                                (click)="handleSubmit()">
-                                添加评论
-                            </button>
-                        </nz-form-item>
-                    </nz-comment-content>
-                </nz-comment>
-            </div>
-        </div>
+            <nz-tab nzTitle="所有资源文件">
+                <div nz-col [nzSpan]="24">
+                    <nz-table #borderedTable nzBordered [nzShowSizeChanger]="true" [nzPageSizeOptions]='[5,10,20,30]'
+                        [nzPageSize]="5" [nzShowTotal]="totalTemplate" [nzData]="resourceFiles">
+                        <thead>
+                            <tr>
+                                <th>文件</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of borderedTable.data">
+                                <td><img *ngIf="isImage(data.name)" class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
+                                        alt="{{data.name}}" />
+                                    <span *ngIf="isVideo(data.name)">
+                                        <video width="150" height="120" controls>
+                                            <source src="{{data.pathWithHostUrl}}" type="video/mp4">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/quicktime">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/x-msvideo">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/x-ms-wmv">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/x-flv">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/x-matroska">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/mpeg">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/webm">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/3gpp">
+                                            <source src="{{data.pathWithHostUrl}}" type="application/vnd.rn-realmedia-vbr">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/x-m4v">
+                                            <source src="{{data.pathWithHostUrl}}" type="video/dvd">
+                                            您的浏览器不支持播放视频文件
+                                        </video>
+                                    </span>
+                                    <span *ngIf="!isImage(data.name) && !isVideo(data.name)">{{data.name}}</span>
+                                </td>
+                                <td>
+                                    <button nz-button nzType="primary" (click)="downloadResourceFile(data)"
+                                        nzTooltipTitle="下载" nzTooltipPlacement="topLeft" nz-tooltip>
+                                        <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+                <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
+            </nz-tab>
+        </nz-tabset>
     </ng-container>
 </nz-drawer>

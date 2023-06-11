@@ -36,8 +36,25 @@
                         <tr *ngFor="let data of borderedTable.data">
                             <td>{{ data.name }}</td>
                             <td><img *ngIf="isImage(data.name)" class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
-                                    alt="{{data.name}}" />
-                                <span *ngIf="!isImage(data.name)">{{data.name}}</span>
+                                alt="{{data.name}}" />
+                            <span *ngIf="isVideo(data.name)">
+                                <video width="150" height="120" controls>
+                                    <source src="{{data.pathWithHostUrl}}" type="video/mp4">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/quicktime">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/x-msvideo">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/x-ms-wmv">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/x-flv">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/x-matroska">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/mpeg">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/webm">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/3gpp">
+                                    <source src="{{data.pathWithHostUrl}}" type="application/vnd.rn-realmedia-vbr">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/x-m4v">
+                                    <source src="{{data.pathWithHostUrl}}" type="video/dvd">
+                                    您的浏览器不支持播放视频文件
+                                </video>
+                            </span>
+                            <span *ngIf="!isImage(data.name) && !isVideo(data.name)">{{data.name}}</span>
                             </td>
                             <td style="width:30%">
                                 <span *ngIf="!data.isValid">
@@ -73,8 +90,6 @@
                 </nz-table>
             </div>
             <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
-
-
         </div>
     </ng-container>
 

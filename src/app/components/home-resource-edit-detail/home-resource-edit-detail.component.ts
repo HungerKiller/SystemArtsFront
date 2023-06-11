@@ -190,6 +190,10 @@ export class HomeResourceEditDetailComponent implements OnInit {
   }
 
   isImage(name: string): boolean {
-    return Utils.isImageFileName(name);
+    return Utils.isImageFile(name);
+  }
+
+  isVideo(name: string): boolean {
+    return Utils.isVideoFile(name);
   }
 }

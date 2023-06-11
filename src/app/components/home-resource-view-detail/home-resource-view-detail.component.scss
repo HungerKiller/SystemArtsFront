@@ -38,3 +38,11 @@
     color:#3399ff;
     font-size: 30px;
 }
+
+.photo {
+    height: 50%;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 16px;
+    cursor: pointer;
+}

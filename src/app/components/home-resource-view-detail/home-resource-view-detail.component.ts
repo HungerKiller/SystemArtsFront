@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import Utils from 'src/app/Helpers/Utils';
 import { Comment } from 'src/app/models/Comment';
 import { OrderProduct } from 'src/app/models/OrderProduct';
 import { Resource } from 'src/app/models/Resource';
@@ -9,6 +10,7 @@ import { User } from 'src/app/models/User';
 import { UserFavorite } from 'src/app/models/UserFavorite';
 import { CommentService } from 'src/app/services/comment.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ResourceFileService } from 'src/app/services/resource-file.service';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceService } from 'src/app/services/resource.service';
 import { UserFavoriteService } from 'src/app/services/user-favorite.service';
@@ -32,6 +34,7 @@ export class HomeResourceViewDetailComponent implements OnInit {
   updatedAt!: Date;
   comments!: Comment[];
   resourceFiles!: ResourceFile[];
+  resourcePhotoFiles!: ResourceFile[];
   currentUser: User | undefined;
 
   userId!: number;
@@ -55,6 +58,7 @@ export class HomeResourceViewDetailComponent implements OnInit {
   constructor(
     private resourceService: ResourceService,
     private resourceTypeService: ResourceTypeService,
+    private resourceFileService: ResourceFileService,
     private userFavoriteService: UserFavoriteService,
     private userService: UserService,
     private commentService: CommentService,
@@ -163,5 +167,31 @@ export class HomeResourceViewDetailComponent implements OnInit {
           });
         }
       });
+  }
+
+  downloadResourceFile(resourceFile: ResourceFile){
+    this.resourceFileService.downloadResourceFile(resourceFile.id)
+      .subscribe({
+        next: (response: Blob) => {
+          const downloadUrl = URL.createObjectURL(response);
+          const link = document.createElement('a');
+          link.href = downloadUrl;
+          link.download = resourceFile.name;
+          link.click();
+          URL.revokeObjectURL(downloadUrl);
+          this.messageService.create("success", "下载成功!");
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
+  }
+
+  isImage(name: string): boolean {
+    return Utils.isImageFile(name);
+  }
+
+  isVideo(name: string): boolean {
+    return Utils.isVideoFile(name);
   }
 }
