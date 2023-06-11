@@ -6,6 +6,13 @@
     <nz-select *ngIf="currentUser" style="width: 100px; padding-left: 8px;" [(ngModel)]="selectedUserFavorite" (ngModelChange)="onSelectedUserFavoriteChange($event)">
         <nz-option *ngFor="let favorite of userFavorites" [nzValue]="favorite.id" [nzLabel]="favorite.name"></nz-option>
     </nz-select>
+
+    <nz-input-group style="padding-left: 8px; width: 300px;" nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input [(ngModel)]="searchValue" placeholder="输入关键字查找" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" (click)="search()" nzSearch><span nz-icon nzType="search"></span></button>
+    </ng-template>
 </div>
 
 <!-- 

@@ -29,6 +29,7 @@ export class HomeResourceViewComponent implements OnInit {
   selectedResourceType: any;
   userFavorites: any[] = [{ id: 1, name: "所有" }, { id: 2, name: "仅我收藏" }];
   selectedUserFavorite: any = 1;
+  searchValue!: string;
 
   constructor(
     private resourceService: ResourceService,
@@ -51,20 +52,7 @@ export class HomeResourceViewComponent implements OnInit {
       .subscribe({
         next: resources => {
           this.loading = false;
-          // Filter by resource type
-          if (this.selectedResourceType == 0) {
-            this.resources = resources;
-          }
-          else {
-            this.resources = resources.filter(r => r.resourceType.id == this.selectedResourceType);
-          }
-
-          // Set resource file path
-          for (let resource of resources) {
-            resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
-            resource.resourceFilesPath = [];
-            resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
-          }
+          this.setResources(resources);
         }
       });
   }
@@ -77,22 +65,30 @@ export class HomeResourceViewComponent implements OnInit {
           next: userFavorites => {
             this.loading = false;
             let resources = userFavorites.map(f => f.resource);
-            // Filter by resource type
-            if (this.selectedResourceType == 0) {
-              this.resources = resources;
-            }
-            else {
-              this.resources = resources.filter(r => r.resourceType.id == this.selectedResourceType);
-            }
-
-            // Set resource file path
-            for (let resource of resources) {
-              resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
-              resource.resourceFilesPath = [];
-              resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
-            }
+            this.setResources(resources);
           }
         });
+    }
+  }
+
+  setResources(resources: Resource[]) {
+    // Filter by resource type
+    if (this.selectedResourceType == 0) {
+      this.resources = resources;
+    }
+    else {
+      this.resources = resources.filter(r => r.resourceType.id == this.selectedResourceType);
+    }
+
+    if (this.searchValue){
+      this.resources = this.resources.filter(r => r.title.includes(this.searchValue));
+    }
+
+    // Set resource file path
+    for (let resource of resources) {
+      resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
+      resource.resourceFilesPath = [];
+      resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
     }
   }
 
@@ -174,6 +170,14 @@ export class HomeResourceViewComponent implements OnInit {
     }
   }
   
+  search(): void {
+    if (this.selectedUserFavorite == 2) {
+      this.getResourcesOnlyFavorite();
+    }
+    else {
+      this.getResources();
+    }
+  }
 
   refresh() {
     this.getResources();
