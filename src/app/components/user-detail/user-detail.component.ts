@@ -16,6 +16,7 @@ export class UserDetailComponent implements OnInit {
   password!: string;
   email!: string;
   age?: number;
+  money?: number;
   role!: RoleEnum;
 
   roles = Object.values(RoleEnum);
@@ -42,7 +43,7 @@ export class UserDetailComponent implements OnInit {
       return;
     }
     if (this.pageTitle == "Update") {
-      this.userService.putUser(this.id, { id: this.id, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
+      this.userService.putUser(this.id, { id: this.id, username: this.username, password: this.password, email: this.email, age: this.age, money: this.money, role: this.role })
         .subscribe({
           next: data => {
             this.messageService.create("success", "更新成功!");
@@ -55,7 +56,7 @@ export class UserDetailComponent implements OnInit {
         });
     }
     else if (this.pageTitle == "Create") {
-      this.userService.postUser({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
+      this.userService.postUser({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, money: this.money, role: this.role })
         .subscribe({
           next: data => {
             this.messageService.create("success", "创建成功!");
@@ -68,7 +69,7 @@ export class UserDetailComponent implements OnInit {
         });
     }
     else if (this.pageTitle == "Register") {
-      this.authService.register({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, role: this.role })
+      this.authService.register({ id: 0, username: this.username, password: this.password, email: this.email, age: this.age, money: this.money, role: this.role })
         .subscribe({
           next: data => {
             this.messageService.create("success", "注册成功!");

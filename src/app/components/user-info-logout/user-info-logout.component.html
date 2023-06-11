@@ -7,9 +7,41 @@
         <p nz-typography>密码: {{currentUser?.password}}</p>
         <p nz-typography>邮箱: {{currentUser?.email}}</p>
         <p nz-typography>年龄: {{currentUser?.age}}</p>
+        <p nz-typography>余额: {{currentUser?.money ?? 0}} ¥</p> 
         <p nz-typography>角色: {{currentUser?.role}}</p>
         <button nz-button class="button" (click)="update()" [nzType]="'primary'">更新</button>
         <button nz-button class="button" (click)="logout()" [nzType]="'primary'">登出</button>
+
+        <button nz-button class="button" style="background-color: #87d068; border: none;" [nzType]="'primary'" (click)="showRechargeModal()"><span>充值</span></button>
+        <nz-modal [(nzVisible)]="isRechargeVisible" nzTitle="充值" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+            <ng-container *nzModalContent>
+                <div nz-col nzSpan="24">
+                    <nz-tag [nzColor]="'#87d068'" style="font-size: 18px;">充值金额</nz-tag>
+                    <nz-input-number [(ngModel)]="rechargeMoney" [nzMin]="1" [nzMax]="99999999" [nzStep]="1"></nz-input-number> ¥
+                </div>
+                <nz-radio-group [(ngModel)]="radioValue">
+                    <label nz-radio nzValue="A">
+                        <img src="../../../assets/images/Ali_Pay.jpg" alt="支付宝支付" width="115" />
+                    </label>
+                    <label nz-radio nzValue="B">
+                        <img src="../../../assets/images/WeChat_Pay.png" alt="微信支付" width="115" />
+                    </label>
+                    <label nz-radio nzValue="C">
+                        <img src="../../../assets/images/Union_Pay.webp" alt="银联支付" width="115" />
+                    </label>
+                    <label nz-radio nzValue="D">
+                        <img src="../../../assets/images/bc.png" alt="中国银行" width="115" />
+                    </label>
+                    <label nz-radio nzValue="E">
+                        <img src="../../../assets/images/bcm.jpg" alt="招商银行" width="115" />
+                    </label>
+                    <label nz-radio nzValue="F">
+                        <img src="../../../assets/images/bcc.png" alt="中信银行" width="115" />
+                    </label>
+                  </nz-radio-group>
+            </ng-container>
+        </nz-modal>
+
     </div>
 </div>
 

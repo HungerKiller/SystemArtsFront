@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
     this.userDetailComponent.password = selectedUser.password;
     this.userDetailComponent.email = selectedUser.email;
     this.userDetailComponent.age = selectedUser.age;
+    this.userDetailComponent.money = selectedUser.money;
     this.userDetailComponent.role = selectedUser.role;
     this.userDetailComponent.pageTitle = "Update";
     this.userDetailComponent.pageTitleChinese = "编辑";

@@ -3,6 +3,8 @@ import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-info-logout',
@@ -14,7 +16,11 @@ export class UserInfoLogoutComponent implements OnInit {
   @ViewChild(UserDetailComponent) userDetailComponent!: UserDetailComponent
   currentUser: User | undefined;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router,
+    private messageService: NzMessageService) {
     this.authService.subject$.subscribe(
       value => {
         this.getCurrentUser();
@@ -61,5 +67,35 @@ export class UserInfoLogoutComponent implements OnInit {
 
   refresh() {
     this.getCurrentUser();
+  }
+
+
+
+  rechargeMoney = 0;
+  isRechargeVisible = false;
+  radioValue = 'A';
+
+  showRechargeModal(): void {
+    this.isRechargeVisible = true;
+  }
+
+  handleOk(): void {
+    var totalMoney = this.currentUser?.money! + this.rechargeMoney;
+    this.userService.putUser(this.currentUser?.id!, { id: this.currentUser?.id!, username: this.currentUser?.username!, password: this.currentUser?.password!, email: this.currentUser?.email!, age: this.currentUser?.age, money: totalMoney, role: this.currentUser?.role! })
+        .subscribe({
+          next: data => {
+            this.messageService.create("success", "充值成功!");
+            this.refresh();
+          },
+          error: error => {
+            this.messageService.create("error", error.error);
+          }
+        });
+    this.isRechargeVisible = false;
+  }
+
+  handleCancel(): void {
+    this.messageService.create("success", "取消充值!");
+    this.isRechargeVisible = false;
   }
 }

@@ -14,6 +14,7 @@
                     <th>密码</th>
                     <th>邮箱</th>
                     <th>年龄</th>
+                    <th>余额(¥)</th>
                     <th>角色</th>
                     <th>操作</th>
                 </tr>
@@ -25,6 +26,7 @@
                     <td>{{ data.password }}</td>
                     <td>{{ data.email }}</td>
                     <td>{{ data.age }}</td>
+                    <td>{{ data.money }}</td>
                     <td>{{ data.role }}</td>
                     <td>
                         <button nz-button nzType="primary" (click)="editUser(data)" nzTooltipTitle="编辑"

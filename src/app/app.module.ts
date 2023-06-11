@@ -41,6 +41,7 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { HomeResourceViewComponent } from './components/home-resource-view/home-resource-view.component';
@@ -130,6 +131,7 @@ registerLocaleData(zh);
     NzTimelineModule,
     NzModalModule,
     NzTabsModule,
+    NzRadioModule,
     EchartsxModule
   ],
   providers: [
