@@ -1,4 +1,4 @@
-<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="500" [nzVisible]="isVisible"
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="800" [nzVisible]="isVisible"
     [nzTitle]="pageTitleChinese" [nzFooter]="footerTpl" (nzOnClose)="close()">
     <ng-container *nzDrawerContent>
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
@@ -20,6 +20,60 @@
                     <nz-option *ngFor="let r of resourceTypes" [nzValue]="r.id" [nzLabel]="r.name"></nz-option>
                 </nz-select>
             </div>
+
+            <div nz-col [nzSpan]="24">
+                <nz-tag class="tag" [nzColor]="'cyan'">资源文件列表</nz-tag><br />
+                <nz-table #borderedTable nzBordered [nzShowSizeChanger]="true" [nzPageSizeOptions]='[5,10,20,30]'
+                    [nzPageSize]="5" [nzShowTotal]="totalTemplate" [nzData]="resourceFiles">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>文件</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of borderedTable.data">
+                            <td>{{ data.name }}</td>
+                            <td><img class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
+                                    alt="" />
+                            </td>
+                            <td style="width:30%">
+                                <span *ngIf="!data.isValid">
+                                    <button nz-button nzType="primary" (click)="validateResourceFile(data)" nzTooltipTitle="通过审核"
+                                        nzTooltipPlacement="topLeft" nz-tooltip>
+                                        <i nz-icon nzType="like" nzTheme="fill"></i>
+                                    </button>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                </span>
+
+                                <span *ngIf="data.isValid">
+                                    <button nz-button nzType="primary" nzDanger (click)="invalidateResourceFile(data)" nzTooltipTitle="未通过审核"
+                                        nzTooltipPlacement="topLeft" nz-tooltip>
+                                        <i nz-icon nzType="dislike" nzTheme="fill"></i>
+                                    </button>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                </span>
+
+                                <button nz-button nzType="primary" (click)="downloadResourceFile(data)"
+                                    nzTooltipTitle="下载" nzTooltipPlacement="topLeft" nz-tooltip>
+                                    <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
+                                </button>
+                                <nz-divider nzType="vertical"></nz-divider>
+
+                                <button nz-button nzType="primary" nzDanger nzTooltipTitle="删除"
+                                    nzTooltipPlacement="topLeft" nz-tooltip nz-popconfirm nzPopconfirmTitle="确认删除?"
+                                    nzOkText="确认" nzCancelText="取消" (nzOnConfirm)="deleteResourceFile(data)">
+                                    <i nz-icon nzType="delete" nzTheme="fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+            <ng-template #totalTemplate let-total> 共 {{ total }} 个</ng-template>
+
+
         </div>
     </ng-container>
 

@@ -4,8 +4,8 @@
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">
             <div nz-col nzSpan="24">
                 <nz-carousel nzAutoPlay>
-                    <div nz-carousel-content *ngFor="let path of resourceFilesPath">
-                        <img nz-image class="img" [nzSrc]="path" alt="" />
+                    <div nz-carousel-content *ngFor="let file of resourceFiles">
+                        <img nz-image class="img" [nzSrc]="file.pathWithHostUrl" alt="" />
                     </div>
                 </nz-carousel>
             </div>

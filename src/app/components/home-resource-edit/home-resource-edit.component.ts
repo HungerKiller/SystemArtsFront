@@ -8,6 +8,7 @@ import { RoleEnum, User } from 'src/app/models/User';
 import { ResourceFileService } from 'src/app/services/resource-file.service';
 import { HomeResourceEditDetailComponent } from '../home-resource-edit-detail/home-resource-edit-detail.component';
 import { ApiRoute } from 'src/app/api-routes';
+import { ResourceFile } from 'src/app/models/ResourceFile';
 
 @Component({
   selector: 'app-home-resource-edit',
@@ -43,8 +44,7 @@ export class HomeResourceEditComponent implements OnInit {
           // Set resource file path
           for (let resource of resources) {
             resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
-            resource.resourceFilesPath = [];
-            resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
+            resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
           }
         }
       });
@@ -60,8 +60,7 @@ export class HomeResourceEditComponent implements OnInit {
           // Set resource file path
           for (let resource of resources) {
             resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
-            resource.resourceFilesPath = [];
-            resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
+            resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
           }
         }
       });
@@ -110,7 +109,7 @@ export class HomeResourceEditComponent implements OnInit {
     this.resourceDetailComponent.resourceTypeId = selectedResource.resourceType.id;
     this.resourceDetailComponent.createdAt = selectedResource.createdAt;
     this.resourceDetailComponent.updatedAt = selectedResource.updatedAt;
-    this.resourceDetailComponent.resourceFilesPath = selectedResource.resourceFilesPath;
+    this.resourceDetailComponent.resourceFiles = selectedResource.resourceFiles;
     this.resourceDetailComponent.comments = selectedResource.comments;
     this.resourceDetailComponent.pageTitle = "Update";
     this.resourceDetailComponent.pageTitleChinese = "编辑";
@@ -175,7 +174,7 @@ export class HomeResourceEditComponent implements OnInit {
   }
 
   refresh() {
-    this.getResourcesByUserRole();;
+    this.getResourcesByUserRole();
   }
 
   onImageLoad(event: any) {

@@ -28,6 +28,10 @@ export class ResourceFileService {
         return this.http.post<Resource>(ApiRoute.RESOURCEFILE.uploadResourceFile(resourceId), formData, { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
     }
 
+    putResourceFile(resourceFileId: number, resourceFile: ResourceFile): Observable<ResourceFile> {
+        return this.http.put<ResourceFile>(ApiRoute.RESOURCEFILE.putResourceFile(resourceFileId), resourceFile, { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
+    }
+
     deleteResourceFile(resourceFileId: number): Observable<Resource> {
         return this.http.delete<Resource>(ApiRoute.RESOURCEFILE.deleteResourceFile(resourceFileId), { headers: new HttpHeaders().set('Authorization', `Bearer ${this.token}`) });
     }

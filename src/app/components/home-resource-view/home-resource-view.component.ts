@@ -11,6 +11,7 @@ import { UserFavoriteService } from 'src/app/services/user-favorite.service';
 import { UserFavorite } from 'src/app/models/UserFavorite';
 import { ResourceType } from 'src/app/models/ResourceType';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
+import { ResourceFile } from 'src/app/models/ResourceFile';
 
 @Component({
   selector: 'app-home-resource-view',
@@ -86,9 +87,8 @@ export class HomeResourceViewComponent implements OnInit {
 
     // Set resource file path
     for (let resource of resources) {
-      resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles[0]?.name}`;
-      resource.resourceFilesPath = [];
-      resource.resourceFiles.map(f => resource.resourceFilesPath.push(`${ApiRoute.APPSERVICEHOST}/${f.name}`));
+      resource.firstResouceFilePath = `${ApiRoute.APPSERVICEHOST}/${resource.resourceFiles.filter(f => f.isValid)[0]?.name}`;
+      resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
     }
   }
 
@@ -125,7 +125,7 @@ export class HomeResourceViewComponent implements OnInit {
     this.resourceDetailComponent.userId = selectedResource.user.id;
     this.resourceDetailComponent.createdAt = selectedResource.createdAt;
     this.resourceDetailComponent.updatedAt = selectedResource.updatedAt;
-    this.resourceDetailComponent.resourceFilesPath = selectedResource.resourceFilesPath;
+    this.resourceDetailComponent.resourceFiles = selectedResource.resourceFiles.filter(f => f.isValid);
     this.resourceDetailComponent.comments = selectedResource.comments;
     this.resourceDetailComponent.pageTitle = "Update";
     this.resourceDetailComponent.isVisible = true;

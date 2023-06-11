@@ -15,7 +15,6 @@ export class Resource {
     updatedAt!: Date;
     comments!: Comment[];
     resourceFiles!: ResourceFile[];
-    resourceFilesPath!: string[];
     firstResouceFilePath!: string;
 
     constructor(id: number, title: string, description: string, price: number, clickCount: number, resourceType: ResourceType, user: User) {

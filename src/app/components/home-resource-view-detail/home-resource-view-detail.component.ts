@@ -3,6 +3,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Comment } from 'src/app/models/Comment';
 import { OrderProduct } from 'src/app/models/OrderProduct';
 import { Resource } from 'src/app/models/Resource';
+import { ResourceFile } from 'src/app/models/ResourceFile';
 import { ResourceType } from 'src/app/models/ResourceType';
 import { User } from 'src/app/models/User';
 import { UserFavorite } from 'src/app/models/UserFavorite';
@@ -30,7 +31,7 @@ export class HomeResourceViewDetailComponent implements OnInit {
   createdAt!: Date;
   updatedAt!: Date;
   comments!: Comment[];
-  resourceFilesPath!: string[];
+  resourceFiles!: ResourceFile[];
   currentUser: User | undefined;
 
   userId!: number;

@@ -39,6 +39,7 @@ export class ApiRoute {
         getResourceFiles: () => `${ApiRoute.BaseUrl}/resource-files/`,
         getResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/${resourceFileId}`,
         uploadResourceFile: (resourceId: number) => `${ApiRoute.BaseUrl}/resource-files/upload/${resourceId}`,
+        putResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/${resourceFileId}`,
         deleteResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/${resourceFileId}`,
         downloadResourceFile: (resourceFileId: number) => `${ApiRoute.BaseUrl}/resource-files/download/${resourceFileId}`
     }

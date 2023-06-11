@@ -1,10 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ApiRoute } from 'src/app/api-routes';
 import { Comment } from 'src/app/models/Comment';
 import { Resource } from 'src/app/models/Resource';
+import { ResourceFile } from 'src/app/models/ResourceFile';
 import { ResourceType } from 'src/app/models/ResourceType';
 import { User } from 'src/app/models/User';
 import { CommentService } from 'src/app/services/comment.service';
+import { ResourceFileService } from 'src/app/services/resource-file.service';
 import { ResourceTypeService } from 'src/app/services/resource-type.service';
 import { ResourceService } from 'src/app/services/resource.service';
 
@@ -24,7 +27,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
   resourceTypeId!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  resourceFilesPath!: string[];
+  resourceFiles!: ResourceFile[];
   comments!: Comment[];
 
   currentUser: User | undefined;
@@ -43,6 +46,7 @@ export class HomeResourceEditDetailComponent implements OnInit {
   constructor(
     private resourceService: ResourceService,
     private resourceTypeService: ResourceTypeService,
+    private resourceFileService: ResourceFileService,
     private commentService: CommentService,
     private messageService: NzMessageService) {
     this.getResourceTypes();
@@ -110,5 +114,61 @@ export class HomeResourceEditDetailComponent implements OnInit {
           }
         });
     }
+  }
+
+  validateResourceFile(resourceFile: ResourceFile) {
+    resourceFile.isValid = true;
+    this.resourceFileService.putResourceFile(resourceFile.id, resourceFile)
+      .subscribe({
+        next: data => {
+          this.messageService.create("success", "资源文件通过审核!");
+          this.isNeedRefresh.emit();
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
+  }
+
+  invalidateResourceFile(resourceFile: ResourceFile) {
+    resourceFile.isValid = false;
+    this.resourceFileService.putResourceFile(resourceFile.id, resourceFile)
+      .subscribe({
+        next: data => {
+          this.messageService.create("success", "资源文件重置为未通过审核!");
+          this.isNeedRefresh.emit();
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
+  }
+
+  downloadResourceFile(resourceFile: ResourceFile){}  
+
+  deleteResourceFile(resourceFile: ResourceFile){
+    this.resourceFileService.deleteResourceFile(resourceFile.id)
+      .subscribe({
+        next: data => {
+          this.messageService.create("success", "成功删除资源文件!");
+          this.isNeedRefresh.emit();
+          this.refresh();
+        },
+        error: error => {
+          this.messageService.create("error", error.error);
+        }
+      });
+  }
+
+  refresh() {
+    this.resourceService.getResource(this.resource?.id!)
+      .subscribe({
+        next: resource => {
+          this.resource = resource;
+          // Set resource file path
+          resource.resourceFiles.map(f => f.pathWithHostUrl = `${ApiRoute.APPSERVICEHOST}/${f.name}`);
+          this.resourceFiles = resource.resourceFiles;
+        }
+      });
   }
 }
