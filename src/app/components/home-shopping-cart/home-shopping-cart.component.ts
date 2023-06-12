@@ -95,6 +95,7 @@ export class HomeShoppingCartComponent implements OnInit {
     }
 
     var totalMoney = this.currentUser?.money! - this.totalPrice;
+    totalMoney = Math.round((totalMoney + Number.EPSILON) * 100) / 100;
     this.userService.putUser(this.currentUser?.id!, { id: this.currentUser?.id!, username: this.currentUser?.username!, password: this.currentUser?.password!, email: this.currentUser?.email!, age: this.currentUser?.age, money: totalMoney, role: this.currentUser?.role! })
       .subscribe({
         next: data => {
