@@ -36,9 +36,9 @@
                         <tr *ngFor="let data of borderedTable.data">
                             <td>{{ data.name }}</td>
                             <td><img *ngIf="isImage(data.name)" class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
-                                alt="{{data.name}}" />
+                                alt="{{data.name}}" oncontextmenu="return false;"/>
                             <span *ngIf="isVideo(data.name)">
-                                <video width="150" height="120" controls>
+                                <video width="150" height="120" controls controlsList="nodownload" oncontextmenu="return false;">
                                     <source src="{{data.pathWithHostUrl}}" type="video/mp4">
                                     <source src="{{data.pathWithHostUrl}}" type="video/quicktime">
                                     <source src="{{data.pathWithHostUrl}}" type="video/x-msvideo">

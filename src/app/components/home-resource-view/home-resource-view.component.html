@@ -29,7 +29,7 @@
     <div nz-col class="gutter-row" [nzSpan]="4" *ngFor="let resource of resources">
         <div class="listing" (click)="openResource(resource)">
             <img class="listing-photo" [nzDisablePreview]="true" nz-image nzSrc="{{resource.firstPhotoPath}}"
-                [nzFallback]="fallback" alt="" />
+                [nzFallback]="fallback" alt="" oncontextmenu="return false;"/>
             <span class="listing-heading">{{ resource.title }}</span>
         </div>
     </div>

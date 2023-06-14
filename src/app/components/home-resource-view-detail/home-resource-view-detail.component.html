@@ -7,8 +7,8 @@
                     <div nz-col nzSpan="24">
                         <nz-carousel nzAutoPlay>
                             <div nz-carousel-content *ngFor="let file of resourcePhotoFiles">
-                                <img *ngIf="isImage(file.name)" nz-image class="img" [nzSrc]="file.pathWithHostUrl" alt="" />
-                                <video *ngIf="isVideo(file.name)" class="img" controls>
+                                <img *ngIf="isImage(file.name)" nz-image class="img" [nzDisablePreview]="true" [nzSrc]="file.pathWithHostUrl" alt="" oncontextmenu="return false;"/>
+                                <video *ngIf="isVideo(file.name)" class="img" controls controlsList="nodownload" oncontextmenu="return false;">
                                     <source src="{{file.pathWithHostUrl}}" type="video/mp4">
                                     <source src="{{file.pathWithHostUrl}}" type="video/quicktime">
                                     <source src="{{file.pathWithHostUrl}}" type="video/x-msvideo">
@@ -94,9 +94,9 @@
                         <tbody>
                             <tr *ngFor="let data of borderedTable.data">
                                 <td><img *ngIf="isImage(data.name)" class="photo" [nzDisablePreview]="true" nz-image nzSrc="{{data.pathWithHostUrl}}"
-                                        alt="{{data.name}}" />
+                                        alt="{{data.name}}" oncontextmenu="return false;"/>
                                     <span *ngIf="isVideo(data.name)">
-                                        <video width="150" height="120" controls>
+                                        <video width="150" height="120" controls controlsList="nodownload" oncontextmenu="return false;">
                                             <source src="{{data.pathWithHostUrl}}" type="video/mp4">
                                             <source src="{{data.pathWithHostUrl}}" type="video/quicktime">
                                             <source src="{{data.pathWithHostUrl}}" type="video/x-msvideo">
